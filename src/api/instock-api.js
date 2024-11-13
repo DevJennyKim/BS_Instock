@@ -12,6 +12,18 @@ const getWarehouses = async () => {
   }
 };
 
+const getWarehouseById = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/warehouses/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      throw new Error(`Warehouse with ID ${id} not found`);
+    }
+    throw new Error(`Could not fetch warehouse details: ${error.message}`);
+  }
+};
+
 const getInventories = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/inventories`);
@@ -35,4 +47,4 @@ const addWarehouse = async (newWarehouse) => {
   }
 };
 
-export { getWarehouses, getInventories, addWarehouse };
+export { getWarehouses, getWarehouseById, getInventories, addWarehouse };
