@@ -147,3 +147,37 @@
     border: 1px solid $red;
   }
 }
+
+@mixin in-stock {
+  height: 1.5rem;
+  max-width: 4.375rem;
+  color: $green;
+  background-color: #15846312;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include table-header-mobile;
+
+  @include tablet {
+    height: 1.625rem;
+    @include table-header-desktop;
+  }
+}
+
+@mixin out-of-stock {
+  height: 1.5rem;
+  max-width: 6.5625rem;
+  color: $red;
+  background-color: #c9451512;
+  border-radius: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @include table-header-mobile;
+
+  @include tablet {
+    height: 1.625rem;
+    @include table-header-desktop;
+  }
+}

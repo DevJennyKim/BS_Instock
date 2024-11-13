@@ -3,9 +3,11 @@ import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function WarehouseTableRow({ warehouseInfo }) {
   const {
+    id,
     warehouse_name,
     address,
     city,
@@ -19,11 +21,12 @@ function WarehouseTableRow({ warehouseInfo }) {
       <div className="warehouse-table-row__detail-container">
         <h3 className={`warehouse-table-row__label`}>WAREHOUSE</h3>
         <div className="warehouse-table-row__warehouse-container">
-          <p
-            className={`warehouse-table-row__detail warehouse-table-row__detail--link`}
+          <Link
+            to={`/warehouses/${id}`}
+            className="warehouse-table-row__detail warehouse-table-row__detail--link"
           >
             {warehouse_name}
-          </p>
+          </Link>
           <img
             src={chevron}
             alt="chevron"
@@ -56,11 +59,16 @@ function WarehouseTableRow({ warehouseInfo }) {
           alt="delete button"
           className="warehouse-table-row__icon"
         />
-        <img
-          src={editIcon}
-          alt="edit button"
-          className="warehouse-table-row__icon"
-        />
+        <Link
+          to={`/edit-item/${id}`}
+          className="warehouse-table-row__icon-link"
+        >
+          <img
+            src={editIcon}
+            alt="edit button"
+            className="warehouse-table-row__icon"
+          />
+        </Link>
       </div>
     </article>
   );

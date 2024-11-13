@@ -3,20 +3,22 @@ import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function WarehouseTableRow({ inventoryInfo }) {
-  const { warehouse_name, item_name, category, status, quantity } =
+  const { warehouse_name, item_name, category, status, quantity, id } =
     inventoryInfo;
   return (
     <article className={`inventory-table-row`}>
       <div className="inventory-table-row__detail-container">
         <h3 className={`inventory-table-row__label`}>INVENTORY ITEM</h3>
         <div className="inventory-table-row__warehouse-container">
-          <p
-            className={`inventory-table-row__detail inventory-table-row__detail--link`}
+          <Link
+            to={`/inventory/${id}`}
+            className="inventory-table-row__detail inventory-table-row__detail--link"
           >
             {item_name}
-          </p>
+          </Link>
           <img
             src={chevron}
             alt="chevron"
@@ -26,7 +28,15 @@ function WarehouseTableRow({ inventoryInfo }) {
       </div>
       <div className="inventory-table-row__detail-container">
         <h3 className={`inventory-table-row__label`}>STATUS</h3>
-        <p className={`inventory-table-row__detail`}>{status.toUpperCase()}</p>
+        <p
+          className={`inventory-table-row__detail ${
+            status === "In Stock"
+              ? "inventory-table-row__detail--in-stock"
+              : "inventory-table-row__detail--out-of-stock"
+          }`}
+        >
+          {status.toUpperCase()}
+        </p>
       </div>
 
       <div className="inventory-table-row__detail-container">
@@ -50,11 +60,16 @@ function WarehouseTableRow({ inventoryInfo }) {
           alt="delete button"
           className="inventory-table-row__icon"
         />
-        <img
-          src={editIcon}
-          alt="edit button"
-          className="inventory-table-row__icon"
-        />
+        <Link
+          to={`/edit-item/${id}`}
+          className="inventory-table-row__icon-link"
+        >
+          <img
+            src={editIcon}
+            alt="edit button"
+            className="inventory-table-row__icon"
+          />
+        </Link>
       </div>
     </article>
   );

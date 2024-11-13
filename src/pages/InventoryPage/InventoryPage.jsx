@@ -2,6 +2,7 @@ import "./inventoryPage.scss";
 import * as api from "../../api/instock-api";
 import InventoryTableRow from "../../components/InventoryTableRow/InventoryTableRow";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function InventoryPage() {
   const [inventoryList, setInventoryList] = useState([]);
@@ -24,9 +25,9 @@ function InventoryPage() {
             className="inventory-table__search-input"
           />
         </form>
-        <a href="#" className="inventory-table__button">
+        <Link to="/add-item" className="inventory-table__button">
           + Add New Item
-        </a>
+        </Link>
       </div>
       <div className="inventory-table__column-headers">
         <h3 className="inventory-table__header">INVENTORY ITEM</h3>
