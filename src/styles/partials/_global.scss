@@ -14,4 +14,9 @@ html {
 body {
   font-family: $font-primary;
   font-weight: $regular-weight;
+  background-color: $light-grey;
+}
+
+a {
+  text-decoration: none;
 }

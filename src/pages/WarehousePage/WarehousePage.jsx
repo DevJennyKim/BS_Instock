@@ -15,13 +15,19 @@ function WarehousePage() {
 
   return (
     <section className="warehouse-table">
-      <h1 className="warehouse-table__title">Warehouses</h1>
-      <form action="submit" className="warehouse-table__search">
-        <input type="text" className="warehouse-table__search-input" />
-      </form>
-      <a href="#" className="warehouse-table__button">
-        Add New Warehouse
-      </a>
+      <div className="warehouse-table__header">
+        <h1 className="warehouse-table__title">Warehouses</h1>
+        <form action="submit" className="warehouse-table__search">
+          <input
+            type="text"
+            placeholder="Search.."
+            className="warehouse-table__search-input"
+          />
+        </form>
+        <a href="#" className="warehouse-table__button">
+          Add New Warehouse
+        </a>
+      </div>
       <ul className="warehouse-table__list">
         {warehousesList.map((warehouse) => (
           <li key={warehouse.id}>

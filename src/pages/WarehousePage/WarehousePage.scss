@@ -1,6 +1,43 @@
 @use "../../styles/partials/global" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
 
 .warehouse-table {
+  box-shadow: 0px 2px 5px 0px #13182c1a;
+  border-radius: 3px;
+  width: 90vw;
+  height: 80%;
+  margin: 0 auto;
+  background-color: $white;
+
+  &__title {
+    @include h1-mobile;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  &__search {
+    width: 100%;
+  }
+
+  &__search-input {
+    width: 100%;
+    @include form-field;
+    background-image: url("../../assets/Icons/search-24px.svg");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+  }
+
+  &__button {
+    width: 100%;
+    @include button-primary;
+  }
+
   &__list {
     list-style-type: none;
   }
