@@ -15,7 +15,7 @@ function WarehousePage() {
 
   return (
     <section className="warehouse-table">
-      <div className="warehouse-table__header">
+      <div className="warehouse-table__header-container">
         <h1 className="warehouse-table__title">Warehouses</h1>
         <form action="submit" className="warehouse-table__search">
           <input
@@ -27,6 +27,13 @@ function WarehousePage() {
         <a href="#" className="warehouse-table__button">
           Add New Warehouse
         </a>
+      </div>
+      <div className="warehouse-table__column-headers">
+        <h3 className="warehouse-table__header">WAREHOUSE</h3>
+        <h3 className="warehouse-table__header">ADDRESS</h3>
+        <h3 className="warehouse-table__header">CONTACT NAME</h3>
+        <h3 className="warehouse-table__header">CONTACT INFORMATION</h3>
+        <h3 className="warehouse-table__header">ACTIONS</h3>
       </div>
       <ul className="warehouse-table__list">
         {warehousesList.map((warehouse) => (

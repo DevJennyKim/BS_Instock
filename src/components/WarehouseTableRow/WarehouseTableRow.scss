@@ -9,21 +9,31 @@
   border-top: 1.25px solid $cloud;
   padding: 1rem;
 
-  &__information {
-    display: flex;
-    flex-direction: column;
-    width: 50%;
+  @include tablet {
+    padding: 1rem 2rem;
+    flex-direction: row;
+    align-items: center;
   }
 
   &__detail-container {
     display: flex;
     flex-direction: column;
+    width: 50%;
+
+    @include tablet {
+      width: auto;
+      width: 21%;
+    }
   }
 
   &__label {
     @include table-header-mobile;
     color: $slate;
     padding-top: 1rem;
+
+    @include tablet {
+      display: none;
+    }
   }
 
   &__detail {
@@ -35,5 +45,17 @@
     display: flex;
     justify-content: space-between;
     padding-top: 1rem;
+
+    @include tablet {
+      width: 10%;
+      justify-content: end;
+      align-items: center;
+      padding-top: 0;
+      gap: 1rem;
+    }
+  }
+
+  &__icon {
+    width: 24px;
   }
 }

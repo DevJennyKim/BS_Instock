@@ -12,17 +12,27 @@
 
   &__title {
     @include h1-mobile;
+    color: $instock-black;
+
+    @include tablet {
+      @include h1-desktop;
+      flex-grow: 1;
+    }
   }
 
-  &__header {
+  &__header-container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     padding: 1rem;
-  }
+    flex-wrap: wrap;
 
-  &__search {
-    width: 100%;
+    @include tablet {
+      flex-direction: row;
+      padding: 2rem;
+      flex-grow: 1;
+      gap: 0.75rem;
+    }
   }
 
   &__search-input {
@@ -31,14 +41,47 @@
     background-image: url("../../assets/Icons/search-24px.svg");
     background-position: right 10px center;
     background-repeat: no-repeat;
+
+    @include tablet {
+      max-width: 11.5625rem;
+    }
   }
 
   &__button {
     width: 100%;
     @include button-primary;
+    @include h3-labels-links-button-mobile;
+
+    @include tablet {
+      max-width: 10.625rem;
+    }
   }
 
   &__list {
     list-style-type: none;
+  }
+
+  &__column-headers {
+    display: none;
+
+    @include tablet {
+      background-color: $light-grey;
+      color: $slate;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 2.5rem;
+      padding: 0 2rem;
+    }
+  }
+
+  &__header {
+    @include table-header-desktop;
+    width: 21%;
+
+    &:last-child {
+      text-align: right;
+      width: 10%;
+    }
   }
 }
