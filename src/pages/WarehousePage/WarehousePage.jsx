@@ -25,7 +25,7 @@ function WarehousePage() {
           />
         </form>
         <a href="#" className="warehouse-table__button">
-          Add New Warehouse
+          + Add New Warehouse
         </a>
       </div>
       <div className="warehouse-table__column-headers">
