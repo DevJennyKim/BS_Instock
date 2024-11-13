@@ -1,10 +1,31 @@
-@use '../src/styles/partials/variables' as *;
-@use '../src/styles/partials/global' as *;
-@use '../src/styles/partials/mixins' as *;
+@use "../src/styles/partials/variables" as *;
+@use "../src/styles/partials/global" as *;
+@use "../src/styles/partials/mixins" as *;
 
+body {
+  background-color: $white;
+  margin: 0;
+}
 
-.title{
-  @include h1-desktop;
-  color: $red;
+.app {
+  background-color: $light-grey;
+}
 
+.main-content {
+  background-color: $white;
+  border-radius: 2px;
+  margin: 0 16px;
+  margin-top: -63px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  @include tablet {
+    margin: 0 30px;
+    margin-top: -50px;
+  }
+
+  @include desktop {
+    margin: 0 80px;
+    margin-top: -58px;
+    padding: 40px;
+  }
 }
