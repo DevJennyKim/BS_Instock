@@ -2,7 +2,7 @@
 @use "../../styles/partials/mixins" as *;
 @use "../../styles/partials/global" as *;
 
-.warehouse-table-row {
+.inventory-table-row {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
@@ -47,6 +47,11 @@
       @include tablet {
         order: -2;
       }
+    }
+
+    &:nth-child(5) {
+      justify-self: end;
+      margin-left: auto;
     }
   }
 

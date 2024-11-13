@@ -13,7 +13,7 @@ body {
 
 .main-content {
   background-color: $white;
-  border-radius: 2px;
+  border-radius: 3px;
   margin: 0 16px;
   margin-top: -63px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -26,6 +26,5 @@ body {
   @include desktop {
     margin: 0 80px;
     margin-top: -58px;
-    padding: 40px;
   }
 }

@@ -15,38 +15,52 @@ function WarehouseTableRow({ warehouseInfo }) {
     contact_email,
   } = warehouseInfo;
   return (
-    <article className={`table-row`}>
-      <div className="table-row__detail-container">
-        <h3 className={`table-row__label`}>WAREHOUSE</h3>
-        <div className="table-row__warehouse-container">
-          <p className={`table-row__detail table-row__detail--link`}>
+    <article className={`warehouse-table-row`}>
+      <div className="warehouse-table-row__detail-container">
+        <h3 className={`warehouse-table-row__label`}>WAREHOUSE</h3>
+        <div className="warehouse-table-row__warehouse-container">
+          <p
+            className={`warehouse-table-row__detail warehouse-table-row__detail--link`}
+          >
             {warehouse_name}
           </p>
-          <img src={chevron} alt="chevron" className="table-row__icon--small" />
+          <img
+            src={chevron}
+            alt="chevron"
+            className="warehouse-table-row__icon--small"
+          />
         </div>
       </div>
-      <div className="table-row__detail-container">
-        <h3 className={`table-row__label`}>CONTACT NAME</h3>
-        <p className={`table-row__detail`}>{contact_name}</p>
+      <div className="warehouse-table-row__detail-container">
+        <h3 className={`warehouse-table-row__label`}>CONTACT NAME</h3>
+        <p className={`warehouse-table-row__detail`}>{contact_name}</p>
       </div>
 
-      <div className="table-row__detail-container">
-        <h3 className={`table-row__label`}>ADDRESS</h3>
-        <p className={`table-row__detail`}>{address},</p>
-        <p className={`table-row__detail`}>
+      <div className="warehouse-table-row__detail-container">
+        <h3 className={`warehouse-table-row__label`}>ADDRESS</h3>
+        <p className={`warehouse-table-row__detail`}>{address},</p>
+        <p className={`warehouse-table-row__detail`}>
           {city}, {country}
         </p>
       </div>
 
-      <div className="table-row__detail-container">
-        <h3 className={`table-row__label`}>CONTACT INFORMATION</h3>
-        <p className={`table-row__detail`}>{contact_phone}</p>
-        <p className={`table-row__detail`}>{contact_email}</p>
+      <div className="warehouse-table-row__detail-container">
+        <h3 className={`warehouse-table-row__label`}>CONTACT INFORMATION</h3>
+        <p className={`warehouse-table-row__detail`}>{contact_phone}</p>
+        <p className={`warehouse-table-row__detail`}>{contact_email}</p>
       </div>
 
-      <div className="table-row__icon-container">
-        <img src={deleteIcon} alt="delete button" className="table-row__icon" />
-        <img src={editIcon} alt="edit button" className="table-row__icon" />
+      <div className="warehouse-table-row__icon-container">
+        <img
+          src={deleteIcon}
+          alt="delete button"
+          className="warehouse-table-row__icon"
+        />
+        <img
+          src={editIcon}
+          alt="edit button"
+          className="warehouse-table-row__icon"
+        />
       </div>
     </article>
   );
