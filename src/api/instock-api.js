@@ -12,4 +12,16 @@ const getWarehouses = async () => {
   }
 };
 
-export { getWarehouses };
+const getWarehouseById = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/warehouses/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      throw new Error(`Warehouse with ID ${id} not found`);
+    }
+    throw new Error(`Could not fetch warehouse details: ${error.message}`);
+  }
+};
+
+export { getWarehouses, getWarehouseById };
