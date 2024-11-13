@@ -1,0 +1,76 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.header {
+    background-color: $graphite;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px; // ask about style guide how they understand the grid system
+    padding-bottom: 90px; // will probably need to chnage this or ask about overlaying
+
+    @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 20px 30px 65px 30px;
+    }
+    @include desktop{
+        padding: 24px 80px 68px 80px;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        padding-bottom: 16px;
+    }
+
+    &__instock {
+        height: 28px;
+        width: auto;
+    }
+
+    &__nav {
+        &-list {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            @include tablet {
+                gap: 8px;
+            }
+        }
+
+
+        &-link {
+            @include h3-labels-links-button-mobile;
+            color: $slate;
+            text-decoration: none;
+            padding: 8px 36px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+
+            @include tablet {
+                @include h3-labels-links-button-desktop;
+                padding: 8px 16px;
+            }
+
+            &:hover {
+                color: $white; 
+                text-decoration: underline;
+            }
+
+            &--active {
+                background-color: $instock-black;
+                color: $white;
+
+                &:hover {
+                    background-color: $instock-black;
+                    color: $white;
+                }
+            }
+        }
+    }
+}
