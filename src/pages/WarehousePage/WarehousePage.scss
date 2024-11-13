@@ -53,6 +53,7 @@
     @include h3-labels-links-button-mobile;
 
     @include tablet {
+      @include h3-labels-links-button-desktop;
       max-width: 10.625rem;
     }
   }

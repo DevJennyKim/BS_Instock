@@ -63,9 +63,17 @@
   &__detail {
     @include body-medium-mobile;
 
+    @include tablet {
+      @include body-medium-desktop;
+    }
+
     &--link {
       @include h3-labels-links-button-mobile;
       color: $instock-indigo;
+
+      @include tablet {
+        @include h3-labels-links-button-desktop;
+      }
 
       @include desktop {
         &:hover {
@@ -87,7 +95,7 @@
       justify-content: end;
       align-items: center;
       padding-top: 0;
-      gap: 1rem;
+      gap: 0.5rem;
     }
   }
 
