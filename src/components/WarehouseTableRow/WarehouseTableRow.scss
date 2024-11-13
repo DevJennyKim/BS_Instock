@@ -1,0 +1,25 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.table-row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0.5rem;
+
+  &__detail-container {
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+  }
+
+  &__label {
+    @include table-header-mobile;
+    color: $slate;
+    margin: 0;
+  }
+
+  &__detail {
+    @include body-large-mobile;
+    margin: 0;
+  }
+}
