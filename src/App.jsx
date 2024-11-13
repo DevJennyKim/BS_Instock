@@ -3,6 +3,8 @@ import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import "./App.scss";
 import WarehousePage from "./pages/WarehousePage/WarehousePage";
+import Inventory from './components/Inventory/Inventory';
+
 
 function App() {
   return (
@@ -12,6 +14,7 @@ function App() {
         <main className="main-content">
           <Routes>
             <Route path="/" element={<WarehousePage />} />
+            <Route path ='/inventory' element = {<Inventory />}/>
           </Routes>
         </main>
         <Footer />
