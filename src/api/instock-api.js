@@ -24,4 +24,14 @@ const getWarehouseById = async (id) => {
   }
 };
 
-export { getWarehouses, getWarehouseById };
+const getInventories = async () => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/api/inventories`);
+    return data;
+  } catch (error) {
+    console.error("Could not get inventories list:", error);
+    throw new Error("Error getting inventories list.");
+  }
+};
+
+export { getWarehouses, getWarehouseById, getInventories };

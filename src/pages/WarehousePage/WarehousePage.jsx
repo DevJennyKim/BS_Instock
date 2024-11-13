@@ -1,6 +1,7 @@
 import "./WarehousePage.scss";
 import * as api from "../../api/instock-api";
 import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTableRow";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function WarehousePage() {
@@ -24,9 +25,9 @@ function WarehousePage() {
             className="warehouse-table__search-input"
           />
         </form>
-        <a href="#" className="warehouse-table__button">
+        <Link to="/add-warehouse" className="warehouse-table__button">
           + Add New Warehouse
-        </a>
+        </Link>
       </div>
       <div className="warehouse-table__column-headers">
         <h3 className="warehouse-table__header">WAREHOUSE</h3>
