@@ -26,7 +26,7 @@ function WarehouseTableRow({ inventoryInfo }) {
       </div>
       <div className="inventory-table-row__detail-container">
         <h3 className={`inventory-table-row__label`}>STATUS</h3>
-        <p className={`inventory-table-row__detail`}>{status}</p>
+        <p className={`inventory-table-row__detail`}>{status.toUpperCase()}</p>
       </div>
 
       <div className="inventory-table-row__detail-container">

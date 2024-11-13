@@ -34,7 +34,7 @@
 
     @include tablet {
       width: auto;
-      width: 21%;
+      width: 15%;
     }
 
     &:nth-child(3) {
@@ -46,12 +46,29 @@
     &:first-child {
       @include tablet {
         order: -2;
+        width: 20%;
+      }
+    }
+
+    &:nth-child(4) {
+      @include tablet {
+        width: 10%;
+      }
+    }
+
+    &:nth-child(2) {
+      @include tablet {
+        width: 20%;
       }
     }
 
     &:nth-child(5) {
       justify-self: end;
       margin-left: auto;
+
+      @include tablet {
+        margin: 0;
+      }
     }
   }
 

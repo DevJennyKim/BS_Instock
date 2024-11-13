@@ -76,11 +76,35 @@
 
   &__header {
     @include table-header-desktop;
-    width: 21%;
+    width: 15%;
 
     &:last-child {
       text-align: right;
       width: 10%;
+    }
+
+    &:first-child {
+      @include tablet {
+        width: 20%;
+      }
+    }
+
+    &:nth-child(3) {
+      @include tablet {
+        width: 20%;
+      }
+    }
+
+    &:nth-child(4) {
+      @include tablet {
+        width: 10%;
+      }
+    }
+
+    &:nth-child(5) {
+      @include tablet {
+        margin: 0;
+      }
     }
   }
 }
