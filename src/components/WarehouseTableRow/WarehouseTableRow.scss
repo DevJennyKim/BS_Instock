@@ -24,6 +24,18 @@
       width: auto;
       width: 21%;
     }
+
+    &:nth-child(3) {
+      @include tablet {
+        order: -1;
+      }
+    }
+
+    &:first-child {
+      @include tablet {
+        order: -2;
+      }
+    }
   }
 
   &__label {
