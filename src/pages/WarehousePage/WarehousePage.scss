@@ -1,3 +1,5 @@
+@use "../../styles/partials/global" as *;
+
 .warehouse-table {
   &__list {
     list-style-type: none;
