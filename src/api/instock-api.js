@@ -22,4 +22,17 @@ const getInventories = async () => {
   }
 };
 
-export { getWarehouses, getInventories };
+const addWarehouse = async (newWarehouse) => {
+  try {
+    const { data } = await axios.post(
+      `${baseUrl}/api/warehosues`,
+      newWarehouse
+    );
+    return data;
+  } catch (error) {
+    console.error("Could not add warehouse:", error);
+    throw new Error("Error adding warehouse.");
+  }
+};
+
+export { getWarehouses, getInventories, addWarehouse };
