@@ -15,6 +15,18 @@
     align-items: center;
   }
 
+  @include desktop {
+    &:hover {
+      background-color: #2e66e512;
+    }
+  }
+
+  &__warehouse-container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 4px;
+  }
+
   &__detail-container {
     display: flex;
     flex-direction: column;
@@ -50,6 +62,18 @@
 
   &__detail {
     @include body-medium-mobile;
+
+    &--link {
+      @include h3-labels-links-button-mobile;
+      color: $instock-indigo;
+
+      @include desktop {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
   }
 
   &__icon-container {
@@ -68,6 +92,10 @@
   }
 
   &__icon {
-    width: 24px;
+    width: 1.5rem;
+
+    &--small {
+      width: 1.25rem;
+    }
   }
 }

@@ -1,6 +1,7 @@
 import "./WarehouseTableRow.scss";
 import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
+import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 
 function WarehouseTableRow({ warehouseInfo }) {
@@ -17,9 +18,13 @@ function WarehouseTableRow({ warehouseInfo }) {
     <article className={`table-row`}>
       <div className="table-row__detail-container">
         <h3 className={`table-row__label`}>WAREHOUSE</h3>
-        <p className={`table-row__detail`}>{warehouse_name}</p>
+        <div className="table-row__warehouse-container">
+          <p className={`table-row__detail table-row__detail--link`}>
+            {warehouse_name}
+          </p>
+          <img src={chevron} alt="chevron" className="table-row__icon--small" />
+        </div>
       </div>
-
       <div className="table-row__detail-container">
         <h3 className={`table-row__label`}>CONTACT NAME</h3>
         <p className={`table-row__detail`}>{contact_name}</p>
