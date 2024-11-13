@@ -1,0 +1,102 @@
+@use '../../styles/partials/variables' as *;
+
+@mixin tablet {
+    @media (min-width: 768px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: 1024px) {
+        @content;
+    }
+}
+@mixin font-face($weight) {
+    font-family: $font-primary;
+    font-weight: $weight;
+}
+
+
+@mixin h1-desktop {
+    @include font-face($semi-bold-weight);
+    font-size: 32px;
+    line-height: 40px;
+}
+
+@mixin h1-mobile {
+    @include font-face($semi-bold-weight);
+    font-size: 28px;
+    line-height: 36px;
+}
+
+@mixin h2-desktop {
+    @include font-face($semi-bold-weight);
+    font-size: 24px;
+    line-height: 32px;
+}
+
+@mixin h2-mobile {
+    @include font-face($semi-bold-weight);
+    font-size: 20px;
+    line-height: 28px;
+}
+
+@mixin h3-labels-links-button-desktop {
+    @include font-face($semi-bold-weight);
+    font-size: 14px;
+    line-height: 22px;
+}
+
+@mixin h3-labels-links-button-mobile {
+    @include font-face($semi-bold-weight);
+    font-size: 13px;
+    line-height: 20px;
+}
+
+@mixin table-header-desktop {
+    @include font-face($semi-bold-weight);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+@mixin table-header-mobile {
+    @include font-face($semi-bold-weight);
+    font-size: 11px;
+    line-height: 16px;
+}
+
+@mixin body-large-desktop {
+    @include font-face($regular-weight);
+    font-size: 16px;
+    line-height: 28px;
+}
+
+@mixin body-large-mobile {
+    @include font-face($regular-weight);
+    font-size: 15px;
+    line-height: 26px;
+}
+
+@mixin body-medium-desktop {
+    @include font-face($regular-weight);
+    font-size: 14px;
+    line-height: 22px;
+}
+
+@mixin body-medium-mobile {
+    @include font-face($regular-weight);
+    font-size: 13px;
+    line-height: 20px;
+}
+
+@mixin body-small-desktop {
+    @include font-face($regular-weight);
+    font-size: 12px;
+    line-height: 18px;
+}
+
+@mixin body-small-mobile {
+    @include font-face($regular-weight);
+    font-size: 11px;
+    line-height: 16px;
+}
