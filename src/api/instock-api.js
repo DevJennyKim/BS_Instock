@@ -25,6 +25,18 @@ const getWarehouseById = async (id) => {
   }
 };
 
+const getInventoryItemById = async (id) => {
+  try {
+    const response = await axios.get(`${baseUrl}/api/inventories/${id}`);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      throw new Error(`Inventory item with ID ${id} not found`);
+    }
+    throw new Error(`Could not fetch inventory item details: ${error.message}`);
+  }
+};
+
 const getInventories = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/inventories`);
@@ -84,6 +96,7 @@ const deleteInventoryItem = async (inventoryItemId) => {
 export {
   getWarehouses,
   getWarehouseById,
+  getInventoryItemById,
   getInventories,
   addWarehouse,
   updateWarehouse,

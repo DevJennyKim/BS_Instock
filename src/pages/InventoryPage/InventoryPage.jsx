@@ -43,20 +43,11 @@ function InventoryPage() {
           + Add New Item
         </Link>
       </div>
-      <div className="inventory-table__column-headers">
-        {headerConfigs.map((header) => (
-          <TableHeader
-            key={header}
-            tableName="inventory-table"
-            header={header}
-          />
-        ))}
-      </div>
+      <TableHeader headers={headerConfigs} />
       <ul className="inventory-table__list">
         {inventoryList.map((inventory) => (
           <li key={inventory.id}>
             <InventoryTableRow
-              tableName="inventory-table"
               inventoryInfo={inventory}
               handleClick={handleClick}
             />
