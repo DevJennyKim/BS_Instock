@@ -60,7 +60,7 @@ function WarehouseTableRow({ warehouseInfo }) {
           className="warehouse-table-row__icon"
         />
         <Link
-          to={`/edit-warehouse/${id}`}
+          to={`/warehouses/${id}/edit`}
           className="warehouse-table-row__icon-link"
         >
           <img

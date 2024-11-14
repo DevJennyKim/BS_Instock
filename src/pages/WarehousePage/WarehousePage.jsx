@@ -25,7 +25,7 @@ function WarehousePage() {
             className="warehouse-table__search-input"
           />
         </form>
-        <Link to="/add-warehouse" className="warehouse-table__button">
+        <Link to="/warehouses/add" className="warehouse-table__button">
           + Add New Warehouse
         </Link>
       </div>

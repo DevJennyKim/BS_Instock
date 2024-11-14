@@ -1,0 +1,73 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+
+.add-warehouse-page {
+  &__title {
+    @include h1-mobile;
+
+    @include tablet {
+      @include h1-desktop;
+    }
+  }
+
+  &__title-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+}
+.add-warehouse-form {
+  &__section-header {
+    @include h2-mobile;
+    color: $instock-black;
+    margin-bottom: 1rem;
+
+    @include tablet {
+      @include h2-desktop;
+    }
+  }
+
+  &__input {
+    @include form-field;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  &__label {
+    @include h3-labels-links-button-mobile;
+    color: $instock-black;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    @include tablet {
+      @include h3-labels-links-button-desktop;
+    }
+  }
+
+  &__button-container {
+    background-color: $light-grey;
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem;
+    gap: 0.5rem;
+  }
+
+  &__button {
+    @include button-primary;
+    width: 49%;
+  }
+
+  &__link {
+    @include button-secondary;
+    width: 49%;
+  }
+
+  &__warehouse-details,
+  &__contact-details {
+    padding: 1rem;
+    border-top: 1px solid $cloud;
+  }
+}

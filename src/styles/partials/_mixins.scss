@@ -109,13 +109,42 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid $instock-indigo;
+  @include body-small-mobile;
 
   &:hover {
     background-color: $instock-black;
+    border-color: $instock-black;
+    cursor: pointer;
   }
 
   @include tablet {
     height: 2.375rem;
+    @include body-small-desktop;
+  }
+}
+
+@mixin button-secondary {
+  background-color: $white;
+  height: 2.25rem;
+  padding: 0 1rem;
+  border-radius: 1.25rem;
+  color: $slate;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid $cloud;
+  @include body-small-mobile;
+
+  &:hover {
+    color: $instock-indigo;
+    border-color: $instock-indigo;
+    cursor: pointer;
+  }
+
+  @include tablet {
+    height: 2.375rem;
+    @include body-small-desktop;
   }
 }
 
