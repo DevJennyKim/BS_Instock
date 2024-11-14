@@ -1,11 +1,21 @@
 import "./inventoryPage.scss";
 import * as api from "../../api/instock-api";
+import TableHeader from "../../components/TableHeader/TableHeader";
 import InventoryTableRow from "../../components/InventoryTableRow/InventoryTableRow";
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 function InventoryPage() {
   const [inventoryList, setInventoryList] = useState([]);
+
+  const headerConfigs = [
+    "INVENTORY ITEM",
+    "CATEGORY",
+    "STATUS",
+    "QTY",
+    "WAREHOUSE",
+    "ACTIONS",
+  ];
 
   useEffect(() => {
     const loadInventoryList = async () => {
@@ -34,12 +44,13 @@ function InventoryPage() {
         </Link>
       </div>
       <div className="inventory-table__column-headers">
-        <h3 className="inventory-table__header">INVENTORY ITEM</h3>
-        <h3 className="inventory-table__header">CATEGORY</h3>
-        <h3 className="inventory-table__header">STATUS</h3>
-        <h3 className="inventory-table__header">QTY</h3>
-        <h3 className="inventory-table__header">WAREHOUSE</h3>
-        <h3 className="inventory-table__header">ACTIONS</h3>
+        {headerConfigs.map((header) => (
+          <TableHeader
+            key={header}
+            tableName="inventory-table"
+            header={header}
+          />
+        ))}
       </div>
       <ul className="inventory-table__list">
         {inventoryList.map((inventory) => (
