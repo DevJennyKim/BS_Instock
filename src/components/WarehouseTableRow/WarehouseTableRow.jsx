@@ -4,6 +4,8 @@ import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import Modal from "react-modal";
+import React, {useState} from "react";
 
 function WarehouseTableRow({ warehouseInfo, handleClick }) {
   const {
@@ -16,6 +18,19 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
     contact_phone,
     contact_email,
   } = warehouseInfo;
+
+ 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const confirmDelete = () => {
+    handleClick(id);
+    closeModal();
+  };
+
+
   return (
     <article className={`warehouse-table-row`}>
       <div className="warehouse-table-row__detail-container">
@@ -58,9 +73,7 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
           src={deleteIcon}
           alt="delete button"
           className="warehouse-table-row__icon"
-          onClick={() => {
-            handleClick(id);
-          }}
+          onClick={openModal}
         />
         <Link
           to={`/warehouses/${id}/edit`}
@@ -73,6 +86,24 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
           />
         </Link>
       </div>
+      <Modal
+        isOpen={isModalOpen}
+        onRequestClose={closeModal}
+        contentLabel="Confirm Delete"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <h2>Confirm Deletion</h2>
+        <p>Are you sure you want to delete the warehouse "{warehouse_name}"?</p>
+        <div className="modal__buttons">
+          <button onClick={closeModal} className="modal__button modal__button--cancel">
+            Cancel
+          </button>
+          <button onClick={confirmDelete} className="modal__button modal__button--confirm">
+            Delete
+          </button>
+        </div>
+      </Modal>
     </article>
   );
 }
