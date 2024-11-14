@@ -62,10 +62,14 @@
     @include body-small-mobile;
     color: $red;
     position: absolute;
-    top: 4.15rem;
+    top: 3.75rem;
     display: flex;
     align-items: center;
     gap: 0.25rem;
+
+    @include tablet {
+      top: 4.15rem;
+    }
   }
 
   &__error-message-icon {

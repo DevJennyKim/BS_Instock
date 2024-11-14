@@ -5,7 +5,7 @@ import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function WarehouseTableRow({ inventoryInfo }) {
+function InventoryTableRow({ inventoryInfo, handleClick }) {
   const { warehouse_name, item_name, category, status, quantity, id } =
     inventoryInfo;
   return (
@@ -59,6 +59,9 @@ function WarehouseTableRow({ inventoryInfo }) {
           src={deleteIcon}
           alt="delete button"
           className="inventory-table-row__icon"
+          onClick={() => {
+            handleClick(id);
+          }}
         />
         <Link
           to={`/inventory/${id}/edit`}
@@ -75,8 +78,9 @@ function WarehouseTableRow({ inventoryInfo }) {
   );
 }
 
-export default WarehouseTableRow;
+export default InventoryTableRow;
 
-WarehouseTableRow.propTypes = {
+InventoryTableRow.propTypes = {
   inventoryInfo: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };

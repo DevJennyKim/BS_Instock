@@ -75,9 +75,12 @@
   &__header {
     @include table-header-desktop;
     width: 15%;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
 
     &:last-child {
-      text-align: right;
+      justify-content: end;
       width: 10%;
     }
 
@@ -104,5 +107,9 @@
         margin: 0;
       }
     }
+  }
+
+  &__sort-icon {
+    height: 1rem;
   }
 }
