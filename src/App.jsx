@@ -1,15 +1,15 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import "./App.scss";
-import WarehousePage from "./pages/WarehousePage/WarehousePage";
-import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
-
-import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
-import AddItemPage from "./pages/AddItemPage/AddItemPage";
-import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import InventoryItemDetailsPage from "./pages/InventoryItemDetailsPage/InventoryItemDetailsPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import './App.scss';
+import WarehousePage from './pages/WarehousePage/WarehousePage';
+import InventoryPage from './pages/InventoryPage/InventoryPage';
+import WarehouseFormPage from './pages/WarehouseFormPage/WarehouseFormPage';
+import WarehouseDetailsPage from './pages/WarehouseDetailsPage/WarehouseDetailsPage';
+import AddItemPage from './pages/AddItemPage/AddItemPage';
+import EditItemPage from './pages/EditItemPage/EditItemPage';
+import InventoryItemDetailsPage from './pages/InventoryItemDetailsPage/InventoryItemDetailsPage';
+import NotfoundPage from './pages/NotfoundPage/NotfoundPage';
 
 function App() {
   return (
@@ -36,6 +36,7 @@ function App() {
               path="/inventory/:id"
               element={<InventoryItemDetailsPage />}
             />
+            <Route path="*" element={<NotfoundPage />} />
           </Routes>
         </main>
         <Footer />
