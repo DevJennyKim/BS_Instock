@@ -1,7 +1,7 @@
 import "./WarehouseFormPage.scss";
 import { useState } from "react";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
-import errorIcon from "../../assets/Icons/error-24px.svg";
+import FormField from "../../components/FormField/FormField";
 import { Link, useParams } from "react-router-dom";
 import { addWarehouse, updateWarehouse } from "../../api/instock-api";
 import validator from "validator";
@@ -21,6 +21,32 @@ function WarehouseForm({ action }) {
     contact_phone: "",
     contact_email: "",
   });
+
+  const warehouseDetailsConfigs = [
+    {
+      label: "Warehouse Name",
+      name: "warehouse_name",
+      placeholder: "Warehouse Name",
+    },
+    { label: "Street Address", name: "address", placeholder: "Street Address" },
+    { label: "City", name: "city", placeholder: "City" },
+    { label: "Country", name: "country", placeholder: "Country" },
+  ];
+
+  const contactDetailsConfigs = [
+    {
+      label: "Contact Name",
+      name: "contact_name",
+      placeholder: "Contact Name",
+    },
+    { label: "Position", name: "contact_position", placeholder: "Position" },
+    {
+      label: "Phone Number",
+      name: "contact_phone",
+      placeholder: "Phone Number",
+    },
+    { label: "Email", name: "contact_email", placeholder: "Email" },
+  ];
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
@@ -43,10 +69,9 @@ function WarehouseForm({ action }) {
           errors[key] =
             "Please enter a valid phone number. Format: +X (XXX) XXX-XXXX";
         }
-
-        if (!value) {
-          errors[key] = "This field is required";
-        }
+      }
+      if (!value) {
+        errors[key] = "This field is required";
       }
     }
 
@@ -97,209 +122,33 @@ function WarehouseForm({ action }) {
       <form action="submit" className="warehouse-form" onSubmit={handleSubmit}>
         <section className="warehouse-form__warehouse-details">
           <h2 className="warehouse-form__section-header">Warehouse Details</h2>
-
-          <label className="warehouse-form__label">
-            Warehouse Name
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.warehouse_name && "warehouse-form__input--error"
-              }`}
-              name="warehouse_name"
-              id="warehouse_name"
-              placeholder="Warehouse Name"
-              value={newWarehouse.warehouse_name}
+          {warehouseDetailsConfigs.map(({ label, name, placeholder }) => (
+            <FormField
+              key={name}
+              formName="warehouse-form"
+              label={label}
+              name={name}
+              placeholder={placeholder}
+              value={newWarehouse[name]}
               onChange={handleFieldChange}
+              errorMessage={errorMessages[name]}
             />
-            {errorMessages.warehouse_name && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.warehouse_name}
-              </p>
-            )}
-          </label>
-
-          <label className="warehouse-form__label">
-            Street Address
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.address && "warehouse-form__input--error"
-              }`}
-              name="address"
-              id="address"
-              placeholder="Street Adress"
-              value={newWarehouse.address}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.address && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.address}
-              </p>
-            )}
-          </label>
-
-          <label className="warehouse-form__label">
-            City
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.city && "warehouse-form__input--error"
-              }`}
-              name="city"
-              id="city"
-              placeholder="City"
-              value={newWarehouse.city}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.city && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.city}
-              </p>
-            )}
-          </label>
-
-          <label className="warehouse-form__label">
-            Country
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.country && "warehouse-form__input--error"
-              }`}
-              name="country"
-              id="country"
-              placeholder="Country"
-              value={newWarehouse.country}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.country && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.country}
-              </p>
-            )}
-          </label>
+          ))}
         </section>
         <section className="warehouse-form__contact-details">
           <h2 className="warehouse-form__section-header">Contact Details</h2>
-
-          <label htmlFor="contact_name" className="warehouse-form__label">
-            Contact Name
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.contact_name && "warehouse-form__input--error"
-              }`}
-              name="contact_name"
-              id="contact_name"
-              placeholder="Contact Name"
-              value={newWarehouse.contact_name}
+          {contactDetailsConfigs.map(({ label, name, placeholder }) => (
+            <FormField
+              key={name}
+              formName="warehouse-form"
+              label={label}
+              name={name}
+              placeholder={placeholder}
+              value={newWarehouse[name]}
               onChange={handleFieldChange}
+              errorMessage={errorMessages[name]}
             />
-            {errorMessages.contact_name && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.contact_name}
-              </p>
-            )}
-          </label>
-
-          <label htmlFor="contact_position" className="warehouse-form__label">
-            Position
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.contact_position && "warehouse-form__input--error"
-              }`}
-              name="contact_position"
-              id="contact_position"
-              placeholder="Position"
-              value={newWarehouse.contact_position}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.contact_position && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.contact_position}
-              </p>
-            )}
-          </label>
-
-          <label htmlFor="contact_phone" className="warehouse-form__label">
-            Phone Number
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.contact_phone && "warehouse-form__input--error"
-              }`}
-              name="contact_phone"
-              id="contact_phone"
-              placeholder="Phone Number"
-              value={newWarehouse.contact_phone}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.contact_phone && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.contact_phone}
-              </p>
-            )}
-          </label>
-
-          <label htmlFor="contact_email" className="warehouse-form__label">
-            Email
-            <input
-              type="text"
-              className={`warehouse-form__input ${
-                errorMessages.contact_email && "warehouse-form__input--error"
-              }`}
-              name="contact_email"
-              id="contact_email"
-              placeholder="Email"
-              value={newWarehouse.contact_email}
-              onChange={handleFieldChange}
-            />
-            {errorMessages.contact_email && (
-              <p className="warehouse-form__error-message">
-                <img
-                  src={errorIcon}
-                  alt="error"
-                  className="warehouse-form__error-message-icon"
-                />
-                {errorMessages.contact_email}
-              </p>
-            )}
-          </label>
+          ))}
         </section>
         <div className="warehouse-form__button-container">
           <Link to="/warehouses" className="warehouse-form__link">
