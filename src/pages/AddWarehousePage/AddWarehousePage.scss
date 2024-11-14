@@ -19,6 +19,7 @@
 
     @include tablet {
       border-bottom: 1px solid $cloud;
+      padding: 2rem 2rem 1.5rem 2rem;
     }
   }
 }
@@ -66,6 +67,7 @@
     @include tablet {
       width: 100%;
       justify-content: end;
+      padding: 1rem 2rem;
     }
   }
 
