@@ -25,7 +25,7 @@ function InventoryPage() {
             className="inventory-table__search-input"
           />
         </form>
-        <Link to="/add-item" className="inventory-table__button">
+        <Link to="/inventory/add" className="inventory-table__button">
           + Add New Item
         </Link>
       </div>
