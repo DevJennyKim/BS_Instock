@@ -1,4 +1,3 @@
-// FormField.js
 import PropTypes from "prop-types";
 import errorIcon from "../../assets/Icons/error-24px.svg";
 
