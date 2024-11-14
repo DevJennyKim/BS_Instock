@@ -27,7 +27,7 @@
         }
     }
 
-    &__form {
+    &__container{
         display: flex;
         flex-direction: column;
 
@@ -38,7 +38,20 @@
             border-top: 1px solid $cloud;
             padding: 20px;
         }
+
     }
+    // &__form {
+    //     // display: flex;
+    //     // flex-direction: column;
+
+    //     // @include tablet {
+    //     //     display: flex;
+    //     //     flex-direction: row;
+    //     //     justify-content: space-around;
+    //     //     border-top: 1px solid $cloud;
+    //     //     padding: 20px;
+    //     // }
+    // }
 
     &__details,
     &__availability {
@@ -83,10 +96,20 @@
         color: $slate;
         width: 100%;
 
+
         &--textarea {
             height: 120px;
             width: 100%;
             line-height: 31px;
+        }
+
+        &--select {
+            appearance: none; 
+            background-image: url('../../assets/icons/arrow_drop_down-24px.svg');
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.5rem;
+            cursor: pointer
         }
     }
 
@@ -132,7 +155,6 @@
             display: flex;
             justify-content: flex-end;
             gap: 20px;
-
         }
     }
 
@@ -149,11 +171,10 @@
         @include desktop {
             width: 9%;
         }
-
-
-        &--secondary {
-            background-color: $cloud;
-            border: none;
-        }
     }
+
+    &__button--secondary {
+        @include button-secondary
+        }
+    
 }

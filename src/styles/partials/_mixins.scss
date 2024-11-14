@@ -122,6 +122,29 @@
     }
 }
 
+@mixin button-secondary {
+    background-color: $white !important;
+    height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 1.25rem;
+    color: $slate;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $cloud;
+    @include h3-labels-links-button-mobile;
+
+    &:hover {
+        border-color: $instock-indigo;
+        cursor: pointer;
+    }
+
+    @include tablet {
+        height: 2.375rem;
+        @include h3-labels-links-button-desktop;
+    }
+}
+
 @mixin form-field {
     height: 2.25rem;
     padding: 0 1rem;
@@ -131,7 +154,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: $instock-black;
     @include body-medium-mobile;
 
     @include tablet {
@@ -139,6 +161,7 @@
     }
 
     &:active {
+        background-color: $white;
         border: 1px solid $instock-indigo;
     }
 
