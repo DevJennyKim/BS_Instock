@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
+//warehouse
 const getWarehouses = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/warehouses`);
