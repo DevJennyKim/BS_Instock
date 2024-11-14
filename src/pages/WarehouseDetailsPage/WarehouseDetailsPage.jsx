@@ -5,7 +5,6 @@ import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import TableHeader from "../../components/TableHeader/TableHeader";
-import sortIcon from "../../assets/Icons/sort-24px.svg";
 
 function WarehouseDetailsPage() {
   const [warehouseDetails, setWarehouseDetails] = useState(null);
