@@ -1,7 +1,7 @@
 import "./inventoryPage.scss";
 import * as api from "../../api/instock-api";
 import InventoryTableRow from "../../components/InventoryTableRow/InventoryTableRow";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 function InventoryPage() {
@@ -13,6 +13,10 @@ function InventoryPage() {
     };
     loadInventoryList();
   }, [inventoryList]);
+
+  const handleClick = useCallback((itemId) => {
+    api.deleteInventoryItem(itemId);
+  }, []);
 
   return (
     <section className="inventory-table">
@@ -43,6 +47,7 @@ function InventoryPage() {
             <InventoryTableRow
               tableName="inventory-table"
               inventoryInfo={inventory}
+              handleClick={handleClick}
             />
           </li>
         ))}

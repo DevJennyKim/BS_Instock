@@ -60,10 +60,32 @@ const updateWarehouse = async (updatedWarehouse, warehouseId) => {
   }
 };
 
+const deleteWarehouse = async (warehouseId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/warehouses/${warehouseId}`);
+    return;
+  } catch (error) {
+    console.error("Could not delete warehouse:", error);
+    throw new Error("Error deleting warehouse.");
+  }
+};
+
+const deleteInventoryItem = async (inventoryItemId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/inventories/${inventoryItemId}`);
+    return;
+  } catch (error) {
+    console.error("Could not delete inventory item:", error);
+    throw new Error("Error deleting inventory item.");
+  }
+};
+
 export {
   getWarehouses,
   getWarehouseById,
   getInventories,
   addWarehouse,
   updateWarehouse,
+  deleteWarehouse,
+  deleteInventoryItem,
 };

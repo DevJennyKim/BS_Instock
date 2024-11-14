@@ -2,7 +2,7 @@ import "./WarehousePage.scss";
 import * as api from "../../api/instock-api";
 import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTableRow";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 function WarehousePage() {
   const [warehousesList, setWarehousesList] = useState([]);
@@ -13,6 +13,10 @@ function WarehousePage() {
     };
     loadWarehousesList();
   }, [warehousesList]);
+
+  const handleClick = useCallback((warehouseId) => {
+    api.deleteWarehouse(warehouseId);
+  }, []);
 
   return (
     <section className="warehouse-table">
@@ -42,6 +46,7 @@ function WarehousePage() {
             <WarehouseTableRow
               tableName="warehouse-table"
               warehouseInfo={warehouse}
+              handleClick={handleClick}
             />
           </li>
         ))}
