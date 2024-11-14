@@ -110,7 +110,7 @@
   justify-content: center;
   align-items: center;
   border: 1px solid $instock-indigo;
-  @include body-small-mobile;
+  @include h3-labels-links-button-mobile;
 
   &:hover {
     background-color: $instock-black;
@@ -120,7 +120,7 @@
 
   @include tablet {
     height: 2.375rem;
-    @include body-small-desktop;
+    @include h3-labels-links-button-desktop;
   }
 }
 
@@ -134,7 +134,7 @@
   justify-content: center;
   align-items: center;
   border: 1px solid $cloud;
-  @include body-small-mobile;
+  @include h3-labels-links-button-mobile;
 
   &:hover {
     color: $instock-indigo;
@@ -144,7 +144,7 @@
 
   @include tablet {
     height: 2.375rem;
-    @include body-small-desktop;
+    @include h3-labels-links-button-desktop;
   }
 }
 
