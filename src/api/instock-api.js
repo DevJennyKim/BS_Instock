@@ -64,10 +64,23 @@ const updateWarehouse = async (updatedWarehouse, warehouseId) => {
 //===========================================================================================================================================
 //inventory
 
+const addInventoryItem = async (itemData) => {
+  try {
+    const response = await axios.post(`${baseUrl}/api/inventories`, itemData);
+    return response.data;
+  } catch (error) {
+    if (error.response?.status === 400) {
+      throw new Error(error.response.data.message);
+    }
+    throw new Error('Failed to add inventory item');
+  }
+};
+
 export {
   getWarehouses,
   getWarehouseById,
   getInventories,
   addWarehouse,
   updateWarehouse,
+  addInventoryItem,
 };
