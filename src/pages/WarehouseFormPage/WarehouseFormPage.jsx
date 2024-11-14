@@ -1,5 +1,5 @@
 import "./WarehouseFormPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import FormField from "../../components/FormField/FormField";
 import { Link, useParams } from "react-router-dom";
@@ -21,6 +21,17 @@ function WarehouseForm({ action }) {
     contact_phone: "",
     contact_email: "",
   });
+
+  useEffect(() => {
+    const loadWarehouseDetails = async (warehouseId) => {
+      const warehouseDetails = await api.getWarehouseById(warehouseId);
+      const { id, created_at, updated_at, ...formFields } = warehouseDetails;
+      setNewWarehouse(formFields);
+    };
+    if (action === "update") {
+      loadWarehouseDetails(id);
+    }
+  }, [action, id]);
 
   const warehouseDetailsConfigs = [
     {
