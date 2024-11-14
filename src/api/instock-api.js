@@ -34,4 +34,6 @@ const getInventories = async () => {
   }
 };
 
+// need to call api..addinevttnroyitem...
+
 export { getWarehouses, getWarehouseById, getInventories };
