@@ -213,8 +213,8 @@ function InventoryItemFormPage({ action }) {
               >
                 <option value="">Please select</option>
                 {warehouses.map((warehouse) => (
-                  <option key={warehouse.id} value={warehouse.id}>
-                    {warehouse.name}
+                  <option key={warehouse.id} value={warehouse.warehouse_name}>
+                    {warehouse.warehouse_name}
                   </option>
                 ))}
               </select>
