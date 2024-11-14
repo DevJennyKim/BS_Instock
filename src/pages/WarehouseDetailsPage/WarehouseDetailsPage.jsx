@@ -4,11 +4,20 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
+import TableHeader from "../../components/TableHeader/TableHeader";
 import sortIcon from "../../assets/Icons/sort-24px.svg";
 
 function WarehouseDetailsPage() {
   const [warehouseDetails, setWarehouseDetails] = useState(null);
   const { id } = useParams();
+
+  const headerConfigs = [
+    "INVENTORY ITEM",
+    "CATEGORY",
+    "STATUS",
+    "QUANTITY",
+    "ACTIONS",
+  ];
 
   useEffect(() => {
     const getWarehouseDetails = async () => {
@@ -80,41 +89,13 @@ function WarehouseDetailsPage() {
       </div>
       <div className="warehouse-details__inventory">
         <div className="warehouse-details__column-headers">
-          <div className="warehouse-details__column-header-container">
-            <h3 className="warehouse-details__header">INVENTORY ITEM</h3>
-            <img
-              src={sortIcon}
-              alt="sort"
-              className="warehouse-details__sort-icon"
+          {headerConfigs.map((header) => (
+            <TableHeader
+              key={header}
+              tableName="warehouse-details"
+              header={header}
             />
-          </div>
-          <div className="warehouse-details__column-header-container">
-            <h3 className="warehouse-details__header">CATEGORY</h3>
-            <img
-              src={sortIcon}
-              alt="sort"
-              className="warehouse-details__sort-icon"
-            />
-          </div>
-          <div className="warehouse-details__column-header-container">
-            <h3 className="warehouse-details__header">STATUS</h3>
-            <img
-              src={sortIcon}
-              alt="sort"
-              className="warehouse-details__sort-icon"
-            />
-          </div>
-          <div className="warehouse-details__column-header-container">
-            <h3 className="warehouse-details__header">QUANTITY</h3>
-            <img
-              src={sortIcon}
-              alt="sort"
-              className="warehouse-details__sort-icon"
-            />
-          </div>
-          <div className="warehouse-details__column-header-container">
-            <h3 className="warehouse-details__header">ACTIONS</h3>
-          </div>
+          ))}
         </div>
       </div>
       <ul className="warehouse-details__list">
