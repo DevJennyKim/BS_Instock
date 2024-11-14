@@ -1,0 +1,159 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.add-item {
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: 30px;
+
+        @include tablet {
+            padding: 32px;
+        }
+
+        &-arrow {
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+            cursor: pointer;
+        }
+
+        &-title {
+            @include h1-mobile;
+
+            @include tablet {
+                @include h2-desktop;
+            }
+        }
+    }
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+
+        @include tablet {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            border-top: 1px solid $cloud;
+            padding: 20px;
+        }
+    }
+
+    &__details,
+    &__availability {
+        border-top: 1px solid $cloud;
+        padding: 20px;
+
+        @include tablet {
+            border-top: 1px solid transparent;
+            width: 50%;
+
+            &:first-child {
+                border-right: 1px solid $cloud;
+            }
+        }
+
+        &-title {
+            @include h2-mobile;
+            padding-bottom: 20px;
+
+            @include tablet {
+                @include h2-desktop;
+            }
+        }
+    }
+
+    &__field {
+        margin-bottom: 1rem;
+    }
+
+    &__label {
+        margin-bottom: 0.5rem;
+        display: block;
+        @include h3-labels-links-button-mobile;
+
+        @include tablet {
+            @include h3-labels-links-button-desktop;
+        }
+    }
+
+    &__input {
+        @include form-field;
+        color: $slate;
+        width: 100%;
+
+        &--textarea {
+            height: 120px;
+            width: 100%;
+            line-height: 31px;
+        }
+    }
+
+
+    &__status {
+        display: flex;
+        align-items: center;
+    }
+
+    &__radio-wrapper {
+        display: flex;
+        align-items: center;
+        margin-right: 1rem;
+    }
+
+    &__radio {
+        margin-right: 0.5rem;
+
+        &:checked {
+            +.add-item__radio-label {
+                color: $instock-black;
+            }
+        }
+    }
+
+    &__radio-label {
+        @include body-medium-mobile;
+        color: $slate;
+
+        @include tablet {
+            @include body-medium-desktop;
+        }
+    }
+
+
+    &__actions {
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        background-color: $light-grey;
+
+        @include tablet {
+            display: flex;
+            justify-content: flex-end;
+            gap: 20px;
+
+        }
+    }
+
+
+    &__button {
+        @include button-primary;
+        cursor: pointer;
+        width: 47%;
+
+        @include tablet {
+            width: 18%;
+        }
+
+        @include desktop {
+            width: 9%;
+        }
+
+
+        &--secondary {
+            background-color: $cloud;
+            border: none;
+        }
+    }
+}

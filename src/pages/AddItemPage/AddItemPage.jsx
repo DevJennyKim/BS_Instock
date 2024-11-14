@@ -6,6 +6,60 @@ import backArrow from '../../assets/Icons/arrow_back-24px.svg'
 
 
 function AddItemPage() {
+
+  const navigate = useNavigate();
+  const [warehouses, setWarehouses] = useState([]);
+  const [formData, setFormData] = useState({
+    warehouse_id: '',
+    item_name: '',
+    description: '',
+    category: '',
+    status: 'In Stock',
+    quantity: '0'
+  });
+
+  const categories = ['Electronics', 'Gear', 'Apparel', 'Accessories', 'Other'];
+
+  useEffect(() => {
+    const fetchWarehouses = async () => {
+      try {
+        const warehouseData = await getWarehouses();
+        setWarehouses(warehouseData);
+      } catch (error) {
+        // Handle error
+      }
+    };
+    fetchWarehouses();
+  }, []);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormData(prevState => ({ ...prevState, [name]: value }));
+  };
+
+  // const formatDataForApi = () => {
+  //   const formattedData = {
+  //     ...formData,
+  //     quantity: formData.status === 'Out of Stock' ? 0 : parseInt(formData.quantity),
+  //     warehouse_id: parseInt(formData.warehouse_id)
+  //   };
+  //   return formattedData;
+  // };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+    try {
+      const formattedData = formatDataForApi();
+      await addInventoryItem(formattedData);
+      navigate('/inventory');
+    } catch (error) {
+      // Handle error
+    }
+  };
+
   return (
     <div className="add-item">
         <div className="add-item__header">
@@ -29,7 +83,7 @@ function AddItemPage() {
                         type="text"
                         name="item_name"
                         placeholder="Item Name"
-                        className={className="add-item__input"}
+                        className="add-item__input"
                         value={formData.item_name}
                         onChange={handleChange}
                     />
@@ -41,22 +95,18 @@ function AddItemPage() {
                     <textarea
                         name="description"
                         placeholder="Please enter a brief item description..."
-                        className={"add-item__input add-item__input--textarea"}
+                        className="add-item__input add-item__input--textarea"
                         value={formData.description}
                         onChange={handleChange}
                     />
-                    {errors.description && (
-                        <span className="add-item__error">{errors.description}</span>
-                    )}
                 </div>
-
                 <div className="add-item__field">
                     <label className="add-item__label">
                         Category
                     </label>
                     <select
                         name="category"
-                        className={`add-item__input`}
+                        className="add-item__input"
                         value={formData.category}
                         onChange={handleChange}
                     >
@@ -110,14 +160,11 @@ function AddItemPage() {
                             type="number"
                             name="quantity"
                             placeholder="0"
-                            className={`add-item__input ${errors.quantity ? "add-item__input--error" : ""}`}
+                            className={`add-item__input`}
                             value={formData.quantity}
                             onChange={handleChange}
                             min="0"
                         />
-                        {errors.quantity && (
-                            <span className="add-item__error">{errors.quantity}</span>
-                        )}
                     </div>
                 )}
 
@@ -125,7 +172,7 @@ function AddItemPage() {
                     <label className="add-item__label">Warehouse</label>
                     <select
                         name="warehouse_id"
-                        className={`add-item__input ${errors.warehouse_id ? "add-item__input--error" : ""}`}
+                        className={`add-item__input`}
                         value={formData.warehouse_id}
                         onChange={handleChange}
                     >
@@ -136,13 +183,9 @@ function AddItemPage() {
                             </option>
                         ))}
                     </select>
-                    {errors.warehouse_id && (
-                        <span className="add-item__error">{errors.warehouse_id}</span>
-                    )}
                 </div>
             </div>
-
-           
+            </form>
             <div className="add-item__actions">
                 <button
                     type="button"
@@ -158,7 +201,7 @@ function AddItemPage() {
                     + Add Item
                 </button>
             </div>
-        </form>
+        
     </div>
 );
 }

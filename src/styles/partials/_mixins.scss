@@ -1,183 +1,186 @@
 @use "../../styles/partials/variables" as *;
 
 @mixin tablet {
-  @media (min-width: 768px) {
-    @content;
-  }
+    @media (min-width: 768px) {
+        @content;
+    }
 }
 
 @mixin desktop {
-  @media (min-width: 1024px) {
-    @content;
-  }
+    @media (min-width: 1024px) {
+        @content;
+    }
 }
+
 @mixin font-face($weight) {
-  font-family: $font-primary;
-  font-weight: $weight;
+    font-family: $font-primary;
+    font-weight: $weight;
 }
 
 @mixin h1-desktop {
-  @include font-face($semi-bold-weight);
-  font-size: 32px;
-  line-height: 40px;
+    @include font-face($semi-bold-weight);
+    font-size: 32px;
+    line-height: 40px;
 }
 
 @mixin h1-mobile {
-  @include font-face($semi-bold-weight);
-  font-size: 28px;
-  line-height: 36px;
+    @include font-face($semi-bold-weight);
+    font-size: 28px;
+    line-height: 36px;
 }
 
 @mixin h2-desktop {
-  @include font-face($semi-bold-weight);
-  font-size: 24px;
-  line-height: 32px;
+    @include font-face($semi-bold-weight);
+    font-size: 24px;
+    line-height: 32px;
 }
 
 @mixin h2-mobile {
-  @include font-face($semi-bold-weight);
-  font-size: 20px;
-  line-height: 28px;
+    @include font-face($semi-bold-weight);
+    font-size: 20px;
+    line-height: 28px;
 }
 
 @mixin h3-labels-links-button-desktop {
-  @include font-face($semi-bold-weight);
-  font-size: 14px;
-  line-height: 22px;
+    @include font-face($semi-bold-weight);
+    font-size: 14px;
+    line-height: 22px;
 }
 
 @mixin h3-labels-links-button-mobile {
-  @include font-face($semi-bold-weight);
-  font-size: 13px;
-  line-height: 20px;
+    @include font-face($semi-bold-weight);
+    font-size: 13px;
+    line-height: 20px;
 }
 
 @mixin table-header-desktop {
-  @include font-face($semi-bold-weight);
-  font-size: 12px;
-  line-height: 18px;
+    @include font-face($semi-bold-weight);
+    font-size: 12px;
+    line-height: 18px;
 }
 
 @mixin table-header-mobile {
-  @include font-face($semi-bold-weight);
-  font-size: 11px;
-  line-height: 16px;
+    @include font-face($semi-bold-weight);
+    font-size: 11px;
+    line-height: 16px;
 }
 
 @mixin body-large-desktop {
-  @include font-face($regular-weight);
-  font-size: 16px;
-  line-height: 28px;
+    @include font-face($regular-weight);
+    font-size: 16px;
+    line-height: 28px;
 }
 
 @mixin body-large-mobile {
-  @include font-face($regular-weight);
-  font-size: 15px;
-  line-height: 26px;
+    @include font-face($regular-weight);
+    font-size: 15px;
+    line-height: 26px;
 }
 
 @mixin body-medium-desktop {
-  @include font-face($regular-weight);
-  font-size: 14px;
-  line-height: 22px;
+    @include font-face($regular-weight);
+    font-size: 14px;
+    line-height: 22px;
 }
 
 @mixin body-medium-mobile {
-  @include font-face($regular-weight);
-  font-size: 13px;
-  line-height: 20px;
+    @include font-face($regular-weight);
+    font-size: 13px;
+    line-height: 20px;
 }
 
 @mixin body-small-desktop {
-  @include font-face($regular-weight);
-  font-size: 12px;
-  line-height: 18px;
+    @include font-face($regular-weight);
+    font-size: 12px;
+    line-height: 18px;
 }
 
 @mixin body-small-mobile {
-  @include font-face($regular-weight);
-  font-size: 11px;
-  line-height: 16px;
+    @include font-face($regular-weight);
+    font-size: 11px;
+    line-height: 16px;
 }
 
 @mixin button-primary {
-  background-color: $instock-indigo;
-  height: 2.25rem;
-  padding: 0 1rem;
-  border-radius: 1.25rem;
-  color: $white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    @include font-face($regular-weight);
+    background-color: $instock-indigo;
+    height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 1.25rem;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-color: transparent;
 
-  &:hover {
-    background-color: $instock-black;
-  }
+    &:hover {
+        background-color: $instock-black;
+    }
 
-  @include tablet {
-    height: 2.375rem;
-  }
+    @include tablet {
+        height: 2.375rem;
+    }
 }
 
 @mixin form-field {
-  height: 2.25rem;
-  padding: 0 1rem;
-  border-radius: 1.25rem;
-  border: 1px solid $cloud;
-  color: $white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: $instock-black;
-  @include body-medium-mobile;
+    height: 2.25rem;
+    padding: 0 1rem;
+    border-radius: 1.25rem;
+    border: 1px solid $cloud;
+    color: $white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: $instock-black;
+    @include body-medium-mobile;
 
-  @include tablet {
-    height: 2.375rem;
-  }
+    @include tablet {
+        height: 2.375rem;
+    }
 
-  &:active {
-    border: 1px solid $instock-indigo;
-  }
+    &:active {
+        border: 1px solid $instock-indigo;
+    }
 
-  &::placeholder {
-    color: $slate;
-  }
+    &::placeholder {
+        color: $slate;
+    }
 
-  &--error {
-    border: 1px solid $red;
-  }
+    &--error {
+        border: 1px solid $red;
+    }
 }
 
 @mixin in-stock {
-  height: 1.5rem;
-  max-width: 4.375rem;
-  color: $green;
-  background-color: #15846312;
-  border-radius: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include table-header-mobile;
+    height: 1.5rem;
+    max-width: 4.375rem;
+    color: $green;
+    background-color: #15846312;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include table-header-mobile;
 
-  @include tablet {
-    height: 1.625rem;
-    @include table-header-desktop;
-  }
+    @include tablet {
+        height: 1.625rem;
+        @include table-header-desktop;
+    }
 }
 
 @mixin out-of-stock {
-  height: 1.5rem;
-  max-width: 6.5625rem;
-  color: $red;
-  background-color: #c9451512;
-  border-radius: 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  @include table-header-mobile;
+    height: 1.5rem;
+    max-width: 6.5625rem;
+    color: $red;
+    background-color: #c9451512;
+    border-radius: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @include table-header-mobile;
 
-  @include tablet {
-    height: 1.625rem;
-    @include table-header-desktop;
-  }
+    @include tablet {
+        height: 1.625rem;
+        @include table-header-desktop;
+    }
 }
