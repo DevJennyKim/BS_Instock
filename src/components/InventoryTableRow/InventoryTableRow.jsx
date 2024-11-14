@@ -61,7 +61,7 @@ function WarehouseTableRow({ inventoryInfo }) {
           className="inventory-table-row__icon"
         />
         <Link
-          to={`/edit-item/${id}`}
+          to={`/inventory/${id}/edit`}
           className="inventory-table-row__icon-link"
         >
           <img

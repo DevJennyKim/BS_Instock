@@ -34,4 +34,36 @@ const getInventories = async () => {
   }
 };
 
-export { getWarehouses, getWarehouseById, getInventories };
+const addWarehouse = async (newWarehouse) => {
+  try {
+    const { data } = await axios.post(
+      `${baseUrl}/api/warehouses`,
+      newWarehouse
+    );
+    return data;
+  } catch (error) {
+    console.error("Could not add warehouse:", error);
+    throw new Error("Error adding warehouse.");
+  }
+};
+
+const updateWarehouse = async (updatedWarehouse, warehouseId) => {
+  try {
+    const { data } = await axios.put(
+      `${baseUrl}/api/warehouses/${warehouseId}`,
+      updatedWarehouse
+    );
+    return data;
+  } catch (error) {
+    console.error("Could not update warehouse:", error);
+    throw new Error("Error updating warehouse.");
+  }
+};
+
+export {
+  getWarehouses,
+  getWarehouseById,
+  getInventories,
+  addWarehouse,
+  updateWarehouse,
+};
