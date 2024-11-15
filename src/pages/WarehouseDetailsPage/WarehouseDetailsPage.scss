@@ -38,6 +38,11 @@
     &__back-icon {
         width: 1.5rem;
         height: 1.5rem;
+        transition: transform 0.2s ease;
+
+        &:hover {
+            transform: translateX(-4px);
+        }
     }
 
     &__title {
@@ -94,8 +99,10 @@
             flex-direction: row;
             padding-left: 30px;
         }
-        @include desktop{
+
+        @include desktop {
             padding: 24px;
+            padding-left: 30px;
         }
     }
 
@@ -173,6 +180,11 @@
 
     &__sort-icon {
         height: 1rem;
+    }
+    &__icon{
+        &:hover {
+            transform: scale(1.1);  
+        }
     }
 
     &__header {
