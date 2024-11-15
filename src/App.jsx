@@ -1,14 +1,15 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Header from './components/Header/Header';
-import Footer from './components/Footer/Footer';
-import './App.scss';
-import WarehousePage from './pages/WarehousePage/WarehousePage';
-import InventoryPage from './pages/InventoryPage/InventoryPage';
-import WarehouseFormPage from './pages/WarehouseFormPage/WarehouseFormPage';
-import WarehouseDetailsPage from './pages/WarehouseDetailsPage/WarehouseDetailsPage';
-import InventoryItemFormPage from './pages/InventoryItemFormPage/InventoryItemFormPage';
-import ItemDetailsPage from './pages/ItemDetailsPage/ItemDetailsPage';
-import NotfoundPage from './pages/NotfoundPage/NotfoundPage';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import "./App.scss";
+import WarehousePage from "./pages/WarehousePage/WarehousePage";
+import InventoryPage from "./pages/InventoryPage/InventoryPage";
+import TablePage from "./pages/TablePage/TablePage";
+import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
+import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
+import InventoryItemFormPage from "./pages/InventoryItemFormPage/InventoryItemFormPage";
+import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
+import NotfoundPage from "./pages/NotfoundPage/NotfoundPage";
 
 function App() {
   return (
@@ -17,9 +18,12 @@ function App() {
         <Header />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<WarehousePage />} />
-            <Route path="/warehouses" element={<WarehousePage />} />
-            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/" element={<TablePage page="warehouses" />} />
+            <Route
+              path="/warehouses"
+              element={<TablePage page="warehouses" />}
+            />
+            <Route path="/inventory" element={<TablePage page="inventory" />} />
             <Route
               path="/inventory/add"
               element={<InventoryItemFormPage action="add" />}
