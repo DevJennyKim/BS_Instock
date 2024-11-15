@@ -7,7 +7,7 @@ import InventoryPage from './pages/InventoryPage/InventoryPage';
 import WarehouseFormPage from './pages/WarehouseFormPage/WarehouseFormPage';
 import WarehouseDetailsPage from './pages/WarehouseDetailsPage/WarehouseDetailsPage';
 import InventoryItemFormPage from './pages/InventoryItemFormPage/InventoryItemFormPage';
-import InventoryItemDetailsPage from './pages/InventoryItemDetailsPage/InventoryItemDetailsPage';
+import ItemDetailsPage from './pages/ItemDetailsPage/ItemDetailsPage';
 import NotfoundPage from './pages/NotfoundPage/NotfoundPage';
 
 function App() {
@@ -37,10 +37,7 @@ function App() {
               element={<WarehouseFormPage action="update" />}
             />
             <Route path="/warehouses/:id" element={<WarehouseDetailsPage />} />
-            <Route
-              path="/inventory/:id"
-              element={<InventoryItemDetailsPage />}
-            />
+            <Route path="/inventory/:id" element={<ItemDetailsPage />} />
             <Route path="*" element={<NotfoundPage />} />
           </Routes>
         </main>

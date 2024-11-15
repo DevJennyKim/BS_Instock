@@ -1,0 +1,165 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+.warehouse-details {
+  &__inventory-row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    border-top: 1.25px solid $cloud;
+    padding: 1rem;
+
+    @include tablet {
+      padding: 1rem 2rem;
+      flex-direction: row;
+      align-items: center;
+    }
+
+    @include desktop {
+      &:hover {
+        background-color: $indigo-opacity7;
+      }
+    }
+  }
+
+  &__item-section {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    @include body-medium-mobile;
+
+    @include tablet {
+      width: auto;
+      width: 21%;
+      @include body-medium-desktop;
+    }
+
+    &:nth-child(3) {
+      @include tablet {
+        order: -1;
+        width: 21.5%;
+      }
+    }
+
+    &:first-child {
+      @include tablet {
+        order: -2;
+        width: 26%;
+      }
+    }
+
+    &:nth-child(4) {
+      @include tablet {
+        width: 15%;
+      }
+    }
+  }
+  &__status {
+    &--out-of-stock {
+      @include out-of-stock;
+    }
+    &--in-stock {
+      @include in-stock;
+    }
+  }
+
+  &__item-link {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .warehouse-details__text--item {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__chevron {
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  &__icon-section {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding-top: 1rem;
+
+    @include tablet {
+      width: 10%;
+      justify-content: end;
+      align-items: center;
+      padding-top: 0;
+      gap: 0.5rem;
+    }
+  }
+
+  &__section-label {
+    @include table-header-mobile;
+    color: $slate;
+    padding-top: 1rem;
+    margin-bottom: 0.25rem;
+
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &__text {
+    &--item {
+      @include h3-labels-links-button-mobile;
+      color: $instock-indigo;
+      width: auto;
+
+      @include tablet {
+        @include h3-labels-links-button-desktop;
+      }
+
+      @include desktop {
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
+  &__icon {
+    width: 1.5rem;
+    cursor: pointer;
+
+    &--small {
+      width: 1.25rem;
+    }
+  }
+
+  &__icon-link {
+    height: 1.5rem;
+  }
+
+  .table-header {
+    &__header {
+      &:nth-child(2) {
+        width: 21.5%;
+      }
+
+      &:nth-child(3) {
+        width: 21%;
+      }
+
+      &:nth-child(4) {
+        width: 15%;
+      }
+
+      &:first-child {
+        width: 26%;
+      }
+
+      &:last-child {
+        width: 10%;
+      }
+    }
+  }
+}

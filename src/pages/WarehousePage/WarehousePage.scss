@@ -72,13 +72,13 @@
     }
   }
 
-  &__header {
-    @include table-header-desktop;
-    width: 21%;
+  .table-header {
+    &__header {
+      width: 21%;
 
-    &:last-child {
-      text-align: right;
-      width: 10%;
+      &:last-child {
+        width: 10%;
+      }
     }
   }
 }

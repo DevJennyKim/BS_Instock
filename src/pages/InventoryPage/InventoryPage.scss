@@ -58,50 +58,36 @@
     list-style-type: none;
   }
 
-  &__column-headers {
-    display: none;
+  .table-header {
+    &__header {
+      width: 15%;
 
-    @include tablet {
-      background-color: $light-grey;
-      color: $slate;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      height: 2.5rem;
-      padding: 0 2rem;
-    }
-  }
-
-  &__header {
-    @include table-header-desktop;
-    width: 15%;
-
-    &:last-child {
-      text-align: right;
-      width: 10%;
-    }
-
-    &:first-child {
-      @include tablet {
-        width: 20%;
-      }
-    }
-
-    &:nth-child(3) {
-      @include tablet {
-        width: 20%;
-      }
-    }
-
-    &:nth-child(4) {
-      @include tablet {
+      &:last-child {
         width: 10%;
       }
-    }
 
-    &:nth-child(5) {
-      @include tablet {
-        margin: 0;
+      &:first-child {
+        @include tablet {
+          width: 20%;
+        }
+      }
+
+      &:nth-child(3) {
+        @include tablet {
+          width: 20%;
+        }
+      }
+
+      &:nth-child(4) {
+        @include tablet {
+          width: 10%;
+        }
+      }
+
+      &:nth-child(5) {
+        @include tablet {
+          margin: 0;
+        }
       }
     }
   }

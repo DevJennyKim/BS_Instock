@@ -1,9 +1,9 @@
 import "./WarehouseFormPage.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import FormField from "../../components/FormField/FormField";
 import { Link, useParams } from "react-router-dom";
-import { addWarehouse, updateWarehouse } from "../../api/instock-api";
+import * as api from "../../api/instock-api";
 import validator from "validator";
 import { phone } from "phone";
 import PropTypes from "prop-types";
@@ -21,6 +21,17 @@ function WarehouseForm({ action }) {
     contact_phone: "",
     contact_email: "",
   });
+
+  useEffect(() => {
+    const loadWarehouseDetails = async (warehouseId) => {
+      const warehouseDetails = await api.getWarehouseById(warehouseId);
+      const { id, created_at, updated_at, ...formFields } = warehouseDetails;
+      setNewWarehouse(formFields);
+    };
+    if (action === "update") {
+      loadWarehouseDetails(id);
+    }
+  }, [action, id]);
 
   const warehouseDetailsConfigs = [
     {
@@ -84,9 +95,9 @@ function WarehouseForm({ action }) {
 
     if (validateForm()) {
       if (action === "add") {
-        await addWarehouse(newWarehouse);
+        await api.addWarehouse(newWarehouse);
       } else if (action === "update") {
-        await updateWarehouse(newWarehouse, id);
+        await api.updateWarehouse(newWarehouse, id);
       }
 
       setNewWarehouse({

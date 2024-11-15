@@ -25,6 +25,29 @@ const getWarehouseById = async (id) => {
   }
 };
 
+const getInventoryByWarehouseId = async (warehouseId) => {
+  console.log('Fetching inventory for warehouse:', warehouseId);
+  console.log(
+    'Full URL:',
+    `${baseUrl}/api/warehouses/${warehouseId}/inventories`
+  );
+  try {
+    const response = await axios.get(
+      `${baseUrl}/api/warehouses/${warehouseId}/inventories`
+    );
+    console.log('Inventory response:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error('Error getting warehouse inventory:', error);
+    console.error('Error details:', {
+      status: error.response?.status,
+      data: error.response?.data,
+      url: error.config?.url,
+    });
+    throw error;
+  }
+};
+
 const addWarehouse = async (newWarehouse) => {
   try {
     const { data } = await axios.post(
@@ -51,6 +74,25 @@ const updateWarehouse = async (updatedWarehouse, warehouseId) => {
   }
 };
 
+const deleteWarehouse = async (warehouseId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/warehouses/${warehouseId}`);
+    return;
+  } catch (error) {
+    console.error('Could not delete warehouse:', error);
+    throw new Error('Error deleting warehouse.');
+  }
+};
+
+const deleteInventoryItem = async (inventoryItemId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/inventories/${inventoryItemId}`);
+    return;
+  } catch (error) {
+    console.error('Could not delete inventory item:', error);
+    throw new Error('Error deleting inventory item.');
+  }
+};
 //===========================================================================================================================================
 //inventory
 
@@ -105,10 +147,13 @@ const getInventoryItemById = async (itemId) => {
 export {
   getWarehouses,
   getWarehouseById,
+  getInventoryItemById,
   getInventories,
   addWarehouse,
   updateWarehouse,
-  addInventoryItem,
   updateInventoryItem,
-  getInventoryItemById,
+  addInventoryItem,
+  deleteInventoryItem,
+  deleteWarehouse,
+  getInventoryByWarehouseId,
 };
