@@ -4,7 +4,7 @@ import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import React, {useState} from "react";
+import { useState } from "react";
 import DeletePopup from "../DeletePopup/DeletePopup.jsx";
 
 function WarehouseTableRow({ warehouseInfo, handleClick }) {
@@ -19,7 +19,6 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
     contact_email,
   } = warehouseInfo;
 
- 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const openModal = () => setIsModalOpen(true);
@@ -29,7 +28,6 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
     handleClick(id);
     closeModal();
   };
-
 
   return (
     <article className={`warehouse-table-row`}>
@@ -91,7 +89,7 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
         onClose={closeModal}
         onConfirm={confirmDelete}
         title={`Delete ${warehouse_name} warehouse?`}
-        content={`Please confirm that you'd like to delete the ${warehouse_name} from the list of warehouses. You won't be able to undo this action.`}
+        content={`Please confirm that you'd like to delete the ${warehouse_name} warehouse from the list of warehouses. You won't be able to undo this action.`}
       />
     </article>
   );
