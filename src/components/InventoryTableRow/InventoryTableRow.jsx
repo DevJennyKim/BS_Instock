@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 function InventoryTableRow({ inventoryInfo, handleClick }) {
   const { warehouse_name, item_name, category, status, quantity, id } =
     inventoryInfo;
+
   return (
     <article className={`inventory-table-row`}>
       <div className="inventory-table-row__detail-container">

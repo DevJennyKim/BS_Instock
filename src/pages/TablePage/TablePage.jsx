@@ -1,9 +1,10 @@
+import "./TablePage.scss";
 import { useEffect, useState, useCallback } from "react";
 import * as api from "../../api/instock-api";
 import TableHeader from "../../components/TableHeader/TableHeader";
 import InventoryTableRow from "../../components/InventoryTableRow/InventoryTableRow";
 import { Link } from "react-router-dom";
-import "./TablePage.scss";
+import PropTypes from "prop-types";
 import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTableRow";
 
 function TablePage({ page }) {
@@ -27,16 +28,20 @@ function TablePage({ page }) {
   ];
 
   useEffect(() => {
-    const loadTableData = async (page) => {
+    const loadTableData = async () => {
+      setTableData([]);
+
+      let data = [];
+
       if (page === "warehouses") {
-        setTableData(await api.getWarehouses());
+        data = await api.getWarehouses();
+      } else if (page === "inventory") {
+        data = await api.getInventories();
       }
 
-      if (page === "inventory") {
-        setTableData(await api.getInventories());
-      }
+      setTableData(data);
     };
-    loadTableData(page);
+    loadTableData();
   }, [page]);
 
   const handleClick = useCallback((itemId) => {
@@ -56,7 +61,10 @@ function TablePage({ page }) {
             className="inventory-table__search-input"
           />
         </form>
-        <Link to="/inventory/add" className="inventory-table__button">
+        <Link
+          to={page === "warehouses" ? "/warehouses/add" : "/inventory/add"}
+          className="inventory-table__button"
+        >
           {page === "warehouses" ? "+ Add New Warehouse" : "+ Add New Item"}
         </Link>
       </div>
@@ -65,17 +73,19 @@ function TablePage({ page }) {
         headers={page === "warehouses" ? warehouseHeaders : inventoryHeaders}
       />
       <ul className="inventory-table__list">
-        {page === "warehousese" &&
-          tableData.map((data) => (
+        {page === "warehouses" &&
+          tableData[0]?.address &&
+          tableData?.map((data) => (
             <li key={data.id}>
               <WarehouseTableRow
-                inventoryInfo={data}
+                warehouseInfo={data}
                 handleClick={handleClick}
               />
             </li>
           ))}
         {page === "inventory" &&
-          tableData.map((data) => (
+          tableData[0]?.item_name &&
+          tableData?.map((data) => (
             <li key={data.id}>
               <InventoryTableRow
                 inventoryInfo={data}
@@ -89,3 +99,7 @@ function TablePage({ page }) {
 }
 
 export default TablePage;
+
+TablePage.propTypes = {
+  page: PropTypes.string.isRequired,
+};

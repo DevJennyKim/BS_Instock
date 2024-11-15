@@ -2,8 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header/Header";
 import Footer from "./components/Footer/Footer";
 import "./App.scss";
-import WarehousePage from "./pages/WarehousePage/WarehousePage";
-import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import TablePage from "./pages/TablePage/TablePage";
 import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
 import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
