@@ -2,14 +2,14 @@ import React from 'react';
 import './InventoryItemFormPage.scss';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import FormField from '../../components/FormField/FormField';
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
-import validator from 'validator';
+import errorIcon from '../../assets/Icons/error-24px.svg';
 import * as api from '../../api/instock-api';
 
 function InventoryItemFormPage({ action }) {
   const navigate = useNavigate();
   const [warehouses, setWarehouses] = useState([]);
+  const [error, setError] = useState({});
   const [formData, setFormData] = useState({
     warehouse_id: '',
     item_name: '',
@@ -43,31 +43,30 @@ function InventoryItemFormPage({ action }) {
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setError((prevError) => ({ ...prevError, [name]: '' }));
   }
 
   const validateForm = () => {
-    if (
-      !formData.warehouse_id ||
-      !formData.item_name ||
-      !formData.description ||
-      !formData.category
-    ) {
-      alert('Please fill in all required fields');
-      return false;
+    const errors = {};
+    if (!formData.warehouse_id) {
+      errors.warehouse_id = 'Warehouse is required';
+    } else if (isNaN(parseInt(formData.warehouse_id))) {
+      errors.warehouse_id = 'Invalid warehouse ID';
     }
-
-    if (isNaN(parseInt(formData.warehouse_id))) {
-      alert('Invalid warehouse ID');
-      return false;
-    }
-
+    if (!formData.item_name) errors.item_name = 'Item Name is required';
+    if (!formData.description) errors.description = 'Description is required';
+    if (!formData.category) errors.category = 'Category is required';
     if (formData.status === 'In Stock') {
-      if (isNaN(formData.quantity) || parseInt(formData.quantity) < 0) {
-        alert('Please enter a valid quantity');
-        return false;
+      if (!formData.quantity || parseInt(formData.quantity) < 1) {
+        errors.quantity = 'Quantity must be at least 1';
       }
     }
-    return true;
+    setError(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const quantityChecker = (event) => {
+    event.target.value = event.target.value.replace(/[^0-9]/g, '');
   };
 
   const formatDataForApi = () => ({
@@ -112,26 +111,50 @@ function InventoryItemFormPage({ action }) {
                 type="text"
                 name="item_name"
                 placeholder="Item Name"
-                className="inventory-item__input"
+                className={`inventory-item__input
+                  ${error.item_name && `inventory-item__input--err`}`}
                 value={formData.item_name}
                 onChange={handleChange}
               />
+              {error.item_name && (
+                <div className="inventory-item__error-container">
+                  <img
+                    src={errorIcon}
+                    alt="error"
+                    className={`inventory-item__error-icon`}
+                  />
+                  <p className="inventory-item__error">{error.item_name}</p>
+                </div>
+              )}
             </div>
             <div className="inventory-item__field">
               <label className="inventory-item__label">Description</label>
               <textarea
                 name="description"
                 placeholder="Please enter a brief item description..."
-                className="inventory-item__input inventory-item__input--textarea"
+                className={`inventory-item__input inventory-item__input--textarea ${
+                  error.description && `inventory-item__input--err`
+                }`}
                 value={formData.description}
                 onChange={handleChange}
               />
+              {error.description && (
+                <div className="inventory-item__error-container">
+                  <img
+                    src={errorIcon}
+                    alt="error"
+                    className={`inventory-item__error-icon`}
+                  />
+                  <p className="inventory-item__error">{error.description}</p>
+                </div>
+              )}
             </div>
             <div className="inventory-item__field">
               <label className="inventory-item__label">Category</label>
               <select
                 name="category"
-                className="inventory-item__input inventory-item__input--select"
+                className={`inventory-item__input inventory-item__input--select 
+                  ${error.category && `inventory-item__input--err`}`}
                 value={formData.category}
                 onChange={handleChange}
               >
@@ -142,6 +165,16 @@ function InventoryItemFormPage({ action }) {
                   </option>
                 ))}
               </select>
+              {error.category && (
+                <div className="inventory-item__error-container">
+                  <img
+                    src={errorIcon}
+                    alt="error"
+                    className={`inventory-item__error-icon`}
+                  />
+                  <p className="inventory-item__error">{error.category}</p>
+                </div>
+              )}
             </div>
           </div>
           <div className="inventory-item__availability">
@@ -195,11 +228,24 @@ function InventoryItemFormPage({ action }) {
                   type="number"
                   name="quantity"
                   placeholder="0"
-                  className={`inventory-item__input`}
+                  className={`inventory-item__input ${
+                    error.quantity && `inventory-item__input--err`
+                  }`}
                   value={formData.quantity}
                   onChange={handleChange}
+                  onInput={quantityChecker}
                   min="0"
                 />
+                {error.quantity && (
+                  <div className="inventory-item__error-container">
+                    <img
+                      src={errorIcon}
+                      alt="error"
+                      className="inventory-item__error-icon"
+                    />
+                    <p className="inventory-item__error">{error.quantity}</p>
+                  </div>
+                )}
               </div>
             )}
 
@@ -207,17 +253,28 @@ function InventoryItemFormPage({ action }) {
               <label className="inventory-item__label">Warehouse</label>
               <select
                 name="warehouse_id"
-                className={`inventory-item__input inventory-item__input--select`}
+                className={`inventory-item__input inventory-item__input--select 
+                  ${error.warehouse_id && `inventory-item__input--err`}`}
                 value={formData.warehouse_id}
                 onChange={handleChange}
               >
                 <option value="">Please select</option>
                 {warehouses.map((warehouse) => (
-                  <option key={warehouse.id} value={warehouse.warehouse_name}>
+                  <option key={warehouse.id} value={warehouse.id}>
                     {warehouse.warehouse_name}
                   </option>
                 ))}
               </select>
+              {error.warehouse_id && (
+                <div className="inventory-item__error-container">
+                  <img
+                    src={errorIcon}
+                    alt="error"
+                    className={`inventory-item__error-icon`}
+                  />
+                  <p className="inventory-item__error">{error.warehouse_id}</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -240,5 +297,4 @@ function InventoryItemFormPage({ action }) {
     </div>
   );
 }
-
 export default InventoryItemFormPage;

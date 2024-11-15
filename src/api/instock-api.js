@@ -76,6 +76,19 @@ const addInventoryItem = async (itemData) => {
   }
 };
 
+const updateInventoryItem = async (updatedItem, itemId) => {
+  try {
+    const { data } = await axios.put(
+      `${baseUrl}/api/inventories/${itemId}`,
+      updatedItem
+    );
+    return data;
+  } catch (error) {
+    console.error('Could not update warehouse:', error);
+    throw new Error('Error updating warehouse.');
+  }
+};
+
 export {
   getWarehouses,
   getWarehouseById,
@@ -83,4 +96,5 @@ export {
   addWarehouse,
   updateWarehouse,
   addInventoryItem,
+  updateInventoryItem,
 };

@@ -1,5 +1,6 @@
 @use '../../styles/partials/variables' as *;
 @use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
 
 .inventory-item {
   &__header {
@@ -95,10 +96,22 @@
     width: 100%;
     resize: none;
 
+    &:focus {
+      border: none;
+      outline: 1px solid $instock-indigo;
+    }
     &--textarea {
       height: 120px;
       width: 100%;
       line-height: 31px;
+      &:focus {
+        border: none;
+        outline: 1px solid $instock-indigo;
+      }
+    }
+
+    &--err {
+      border: 1px solid red;
     }
 
     &--select {
@@ -110,7 +123,17 @@
       cursor: pointer;
     }
   }
-
+  &__error-container {
+    display: flex;
+    gap: 0.5rem;
+  }
+  &__error-icon {
+    width: 0.8125rem;
+  }
+  &__error {
+    @include body-small-mobile;
+    color: red;
+  }
   &__status {
     display: flex;
     align-items: center;
