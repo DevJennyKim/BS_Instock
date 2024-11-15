@@ -25,16 +25,6 @@ const getWarehouseById = async (id) => {
   }
 };
 
-const getInventories = async () => {
-  try {
-    const { data } = await axios.get(`${baseUrl}/api/inventories`);
-    return data;
-  } catch (error) {
-    console.error('Could not get inventories list:', error);
-    throw new Error('Error getting inventories list.');
-  }
-};
-
 const addWarehouse = async (newWarehouse) => {
   try {
     const { data } = await axios.post(
@@ -64,6 +54,16 @@ const updateWarehouse = async (updatedWarehouse, warehouseId) => {
 //===========================================================================================================================================
 //inventory
 
+const getInventories = async () => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/api/inventories`);
+    return data;
+  } catch (error) {
+    console.error('Could not get inventories list:', error);
+    throw new Error('Error getting inventories list.');
+  }
+};
+
 const addInventoryItem = async (itemData) => {
   try {
     const response = await axios.post(`${baseUrl}/api/inventories`, itemData);
@@ -89,6 +89,18 @@ const updateInventoryItem = async (updatedItem, itemId) => {
   }
 };
 
+const getInventoryItemById = async (itemId) => {
+  try {
+    const { data } = await axios.get(`${baseUrl}/api/inventories/${itemId}`);
+    return data;
+  } catch (error) {
+    if (error.response?.status === 404) {
+      throw new Error(`Warehouse with ID ${itemId} not found`);
+    }
+    throw new Error(`Could not fetch warehouse details: ${error.message}`);
+  }
+};
+
 export {
   getWarehouses,
   getWarehouseById,
@@ -97,4 +109,5 @@ export {
   updateWarehouse,
   addInventoryItem,
   updateInventoryItem,
+  getInventoryItemById,
 };

@@ -1,12 +1,13 @@
 import React from 'react';
 import './InventoryItemFormPage.scss';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import backArrow from '../../assets/Icons/arrow_back-24px.svg';
 import errorIcon from '../../assets/Icons/error-24px.svg';
 import * as api from '../../api/instock-api';
 
 function InventoryItemFormPage({ action }) {
+  const { id } = useParams();
   const navigate = useNavigate();
   const [warehouses, setWarehouses] = useState([]);
   const [error, setError] = useState({});
@@ -80,13 +81,19 @@ function InventoryItemFormPage({ action }) {
     event.preventDefault();
     if (!validateForm()) {
       return;
-    }
-    try {
+    } else {
       const formattedData = formatDataForApi();
-      await api.addInventoryItem(formattedData);
-      navigate('/inventory');
-    } catch (error) {
-      alert(error.message);
+      try {
+        if (action === 'add') {
+          await api.addInventoryItem(formattedData);
+        } else if (action === 'update') {
+          await updateInventoryItem(formattedData, id);
+        }
+
+        navigate('/inventory');
+      } catch (error) {
+        console.error(error.message);
+      }
     }
   };
 
