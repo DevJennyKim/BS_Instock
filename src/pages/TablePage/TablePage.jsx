@@ -44,9 +44,18 @@ function TablePage({ page }) {
     loadTableData();
   }, [page]);
 
-  const handleClick = useCallback((itemId) => {
-    api.deleteInventoryItem(itemId);
-  }, []);
+  const handleClick = useCallback(
+    async (id) => {
+      if (page === "warehouses") {
+        await api.deleteWarehouse(id);
+        setTableData(await api.getWarehouses());
+      } else if (page === "inventory") {
+        await api.deleteInventoryItem(id);
+        setTableData(await api.getInventories());
+      }
+    },
+    [page]
+  );
 
   return (
     <section className="inventory-table">
