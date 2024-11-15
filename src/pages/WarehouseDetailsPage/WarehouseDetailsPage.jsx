@@ -87,15 +87,7 @@ function WarehouseDetailsPage() {
         </div>
       </div>
       <div className="warehouse-details__inventory">
-        <div className="warehouse-details__column-headers">
-          {headerConfigs.map((header) => (
-            <TableHeader
-              key={header}
-              tableName="warehouse-details"
-              header={header}
-            />
-          ))}
-        </div>
+        <TableHeader headers={headerConfigs} />
       </div>
       <ul className="warehouse-details__list">
         {warehouseDetails.inventory?.map((item) => (
