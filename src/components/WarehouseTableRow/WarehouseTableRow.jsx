@@ -4,8 +4,8 @@ import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import Modal from "react-modal";
 import React, {useState} from "react";
+import DeletePopup from "../DeletePopup/DeletePopup.jsx";
 
 function WarehouseTableRow({ warehouseInfo, handleClick }) {
   const {
@@ -86,24 +86,13 @@ function WarehouseTableRow({ warehouseInfo, handleClick }) {
           />
         </Link>
       </div>
-      <Modal
+      <DeletePopup
         isOpen={isModalOpen}
-        onRequestClose={closeModal}
-        contentLabel="Confirm Delete"
-        className="modal"
-        overlayClassName="modal-overlay"
-      >
-        <h2>Confirm Deletion</h2>
-        <p>Are you sure you want to delete the warehouse "{warehouse_name}"?</p>
-        <div className="modal__buttons">
-          <button onClick={closeModal} className="modal__button modal__button--cancel">
-            Cancel
-          </button>
-          <button onClick={confirmDelete} className="modal__button modal__button--confirm">
-            Delete
-          </button>
-        </div>
-      </Modal>
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title={`Delete ${warehouse_name} warehouse?`}
+        content={`Please confirm that you'd like to delete the ${warehouse_name} from the list of warehouses. You won't be able to undo this action.`}
+      />
     </article>
   );
 }
