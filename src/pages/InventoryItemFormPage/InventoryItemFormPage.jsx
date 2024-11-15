@@ -45,26 +45,18 @@ function InventoryItemFormPage({ action }) {
       const fetchInventoryItem = async () => {
         try {
           const itemData = await api.getInventoryItemById(id);
-          console.log('itemData:', itemData);
-          console.log('itemData.warehouse_id:', itemData.warehouse_id);
           const warehouse = warehouses.find(
             (w) => w.id === itemData.warehouse_id
           );
-          console.log('warehouses', warehouses);
-          console.log('warehouse', warehouse);
           setFormData({
-            warehouse_id: itemData.warehouse_id
-              ? itemData.warehouse_id.toString()
-              : '',
-
+            warehouse_id: itemData.warehouse_id,
             item_name: itemData.item_name,
             description: itemData.description,
             category: itemData.category,
             status: itemData.status,
-            quantity: itemData.quantity ? itemData.quantity.toString() : '0',
+            quantity: itemData.quantity,
             warehouse_name: warehouse ? warehouse.warehouse_name : '',
           });
-          console.log(warehouse);
         } catch (error) {
           console.error('Failed to load inventory item', error);
         }
@@ -94,6 +86,7 @@ function InventoryItemFormPage({ action }) {
         errors.quantity = 'Quantity must be at least 1';
       }
     }
+
     setError(errors);
     return Object.keys(errors).length === 0;
   };
@@ -119,12 +112,11 @@ function InventoryItemFormPage({ action }) {
         if (action === 'add') {
           await api.addInventoryItem(formattedData);
         } else if (action === 'update') {
-          await updateInventoryItem(formattedData, id);
+          await api.updateInventoryItem(formattedData, id);
         }
-
         navigate('/inventory');
       } catch (error) {
-        console.error(error.message);
+        console.error('Error Updating Inventory Item: ', error);
       }
     }
   };

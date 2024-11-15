@@ -6,10 +6,10 @@
   &__header {
     display: flex;
     align-items: center;
-    padding: 30px;
+    padding: 2rem 1rem 1.5rem 1rem;
 
     @include tablet {
-      padding: 32px;
+      padding: 2rem 2rem 1.5rem 2rem;
     }
 
     &-arrow {
@@ -22,7 +22,7 @@
     &-title {
       @include h1-mobile;
       @include tablet {
-        @include h2-desktop;
+        @include h1-desktop;
       }
     }
   }
@@ -39,19 +39,6 @@
       padding: 20px;
     }
   }
-  // &__form {
-  //     // display: flex;
-  //     // flex-direction: column;
-
-  //     // @include tablet {
-  //     //     display: flex;
-  //     //     flex-direction: row;
-  //     //     justify-content: space-around;
-  //     //     border-top: 1px solid $cloud;
-  //     //     padding: 20px;
-  //     // }
-  // }
-
   &__details,
   &__availability {
     border-top: 1px solid $cloud;
