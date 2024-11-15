@@ -6,10 +6,9 @@ import WarehousePage from "./pages/WarehousePage/WarehousePage";
 import InventoryPage from "./pages/InventoryPage/InventoryPage";
 import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
 import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
-import DetailsPage from "./pages/DetailsPage/DetailsPage";
+import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
 import AddItemPage from "./pages/AddItemPage/AddItemPage";
 import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import InventoryItemDetailsPage from "./pages/InventoryItemDetailsPage/InventoryItemDetailsPage";
 import NotfoundPage from "./pages/NotfoundPage/NotfoundPage";
 
 function App() {
@@ -32,14 +31,8 @@ function App() {
               path="/warehouses/:id/edit"
               element={<WarehouseFormPage action="update" />}
             />
-            <Route
-              path="/warehouses/:id"
-              element={<DetailsPage object="warehouse" />}
-            />
-            <Route
-              path="/inventory/:id"
-              element={<DetailsPage object="item" />}
-            />
+            <Route path="/warehouses/:id" element={<WarehouseDetailsPage />} />
+            <Route path="/inventory/:id" element={<ItemDetailsPage />} />
             <Route path="*" element={<NotfoundPage />} />
           </Routes>
         </main>
