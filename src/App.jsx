@@ -1,15 +1,14 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import "./App.scss";
-import WarehousePage from "./pages/WarehousePage/WarehousePage";
-import InventoryPage from "./pages/InventoryPage/InventoryPage";
-import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
-import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
-import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
-import AddItemPage from "./pages/AddItemPage/AddItemPage";
-import EditItemPage from "./pages/EditItemPage/EditItemPage";
-import NotfoundPage from "./pages/NotfoundPage/NotfoundPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import './App.scss';
+import WarehousePage from './pages/WarehousePage/WarehousePage';
+import InventoryPage from './pages/InventoryPage/InventoryPage';
+import WarehouseFormPage from './pages/WarehouseFormPage/WarehouseFormPage';
+import WarehouseDetailsPage from './pages/WarehouseDetailsPage/WarehouseDetailsPage';
+import InventoryItemFormPage from './pages/InventoryItemFormPage/InventoryItemFormPage';
+import ItemDetailsPage from './pages/ItemDetailsPage/ItemDetailsPage';
+import NotfoundPage from './pages/NotfoundPage/NotfoundPage';
 
 function App() {
   return (
@@ -21,8 +20,14 @@ function App() {
             <Route path="/" element={<WarehousePage />} />
             <Route path="/warehouses" element={<WarehousePage />} />
             <Route path="/inventory" element={<InventoryPage />} />
-            <Route path="/inventory/add" element={<AddItemPage />} />
-            <Route path="/inventory/:id/edit" element={<EditItemPage />} />
+            <Route
+              path="/inventory/add"
+              element={<InventoryItemFormPage action="add" />}
+            />
+            <Route
+              path="/inventory/:id/edit"
+              element={<InventoryItemFormPage action="update" />}
+            />
             <Route
               path="/warehouses/add"
               element={<WarehouseFormPage action="add" />}
