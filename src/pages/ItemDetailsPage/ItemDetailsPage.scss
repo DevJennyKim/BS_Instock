@@ -38,6 +38,11 @@
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
+    transition: transform 0.2s ease;
+
+    &:hover {
+      transform: translateX(-4px);
+    }
   }
 
   &__title {
@@ -203,6 +208,7 @@
         padding: 0 5.25rem;
       }
     }
+
     &__header {
       flex: 1;
 

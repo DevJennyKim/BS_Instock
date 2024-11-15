@@ -135,11 +135,9 @@
   &__radio {
     margin-right: 0.5rem;
 
-    &:checked {
-      + .add-item__radio-label {
+    &:checked + .inventory-item__radio-label {
         color: $instock-black;
       }
-    }
   }
 
   &__radio-label {
