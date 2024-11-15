@@ -11,6 +11,7 @@
 
   @include tablet {
     padding: 1rem 2rem;
+    justify-content: start;
     flex-direction: row;
     align-items: center;
   }
@@ -34,18 +35,31 @@
 
     @include tablet {
       width: auto;
-      width: 21%;
-    }
-
-    &:nth-child(3) {
-      @include tablet {
-        order: -1;
-      }
     }
 
     &:first-child {
       @include tablet {
         order: -2;
+        width: 23.75%;
+      }
+    }
+
+    &:nth-child(2) {
+      @include tablet {
+        width: 21.5%;
+      }
+    }
+
+    &:nth-child(3) {
+      @include tablet {
+        order: -1;
+        width: 20%;
+      }
+    }
+
+    &:nth-child(4) {
+      @include tablet {
+        width: 24.6%;
       }
     }
   }
