@@ -9,6 +9,7 @@ import WarehouseTableRow from '../../components/WarehouseTableRow/WarehouseTable
 
 function TablePage({ page }) {
   const [tableData, setTableData] = useState([]);
+  const [search, setSearch] = useState('');
 
   const inventoryHeaders = [
     'INVENTORY ITEM',
@@ -30,15 +31,12 @@ function TablePage({ page }) {
   useEffect(() => {
     const loadTableData = async () => {
       setTableData([]);
-
       let data = [];
-
       if (page === 'warehouses') {
         data = await api.getWarehouses();
       } else if (page === 'inventory') {
         data = await api.getInventories();
       }
-
       setTableData(data);
     };
     loadTableData();
@@ -56,6 +54,37 @@ function TablePage({ page }) {
     },
     [page]
   );
+  const handleChange = (event) => {
+    const { value } = event.target;
+    setSearch(value);
+  };
+
+  const filteredData = tableData.filter((data) => {
+    const keyword = search.toLowerCase();
+
+    if (page === 'warehouses') {
+      return (
+        (data.warehouse_name &&
+          data.warehouse_name.toLowerCase().includes(keyword)) ||
+        (data.address && data.address.toLowerCase().includes(keyword)) ||
+        (data.contact_name &&
+          data.contact_name.toLowerCase().includes(keyword)) ||
+        (data.contact_phone &&
+          data.contact_phone.toLowerCase().includes(keyword)) ||
+        (data.contact_email &&
+          data.contact_email.toLowerCase().includes(keyword))
+      );
+    } else if (page === 'inventory') {
+      return (
+        (data.item_name && data.item_name.toLowerCase().includes(keyword)) ||
+        (data.category && data.category.toLowerCase().includes(keyword)) ||
+        (data.warehouse_name &&
+          data.warehouse_name.toLowerCase().includes(keyword)) ||
+        (data.status && data.status.toLowerCase().includes(keyword))
+      );
+    }
+    return false;
+  });
 
   return (
     <section className="inventory-table">
@@ -68,6 +97,7 @@ function TablePage({ page }) {
             type="text"
             placeholder="Search.."
             className="inventory-table__search-input"
+            onChange={handleChange}
           />
         </form>
         <Link
@@ -83,8 +113,7 @@ function TablePage({ page }) {
       />
       <ul className="inventory-table__list">
         {page === 'warehouses' &&
-          tableData[0]?.address &&
-          tableData?.map((data) => (
+          (filteredData.length > 0 ? filteredData : tableData).map((data) => (
             <li key={data.id}>
               <WarehouseTableRow
                 warehouseInfo={data}
@@ -93,8 +122,7 @@ function TablePage({ page }) {
             </li>
           ))}
         {page === 'inventory' &&
-          tableData[0]?.item_name &&
-          tableData?.map((data) => (
+          (filteredData.length > 0 ? filteredData : tableData).map((data) => (
             <li key={data.id}>
               <InventoryTableRow
                 inventoryInfo={data}
