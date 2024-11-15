@@ -5,22 +5,30 @@ import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import sortIcon from "../../assets/Icons/sort-24px.svg";
+import WarehouseInventoryItem from '../../components/WarehouseInventoryItem/WarehouseInventoryItem';
 
 
 function WarehouseDetailsPage() {
     const [warehouseDetails, setWarehouseDetails] = useState(null);
+    const [inventory, setInventory] = useState([]);
     const { id } = useParams();
 
+
     useEffect(() => {
-        const getWarehouseDetails = async () => {
+        const fetchData = async () => {
             try {
-                const response = await api.getWarehouseById(id);
-                setWarehouseDetails(response);
+                // Fetch warehouse details
+                const warehouseResponse = await api.getWarehouseById(id);
+                setWarehouseDetails(warehouseResponse);
+
+                // Fetch warehouse inventory
+                const inventoryResponse = await api.getInventoryByWarehouseId(id);
+                setInventory(inventoryResponse);
             } catch (error) {
-                console.error("Error loading warehouse details:", error);
+                console.error("Error loading warehouse data:", error);
             }
         };
-        getWarehouseDetails();
+        fetchData();
     }, [id]);
 
     if (!warehouseDetails) {
@@ -89,11 +97,9 @@ function WarehouseDetailsPage() {
                 </div>
             </div>
             <ul className="warehouse-details__list">
-                {warehouseDetails.inventory?.map((item) => (
-                    <li key={item.id}>
-                        <WarehouseInventoryItem
-                            itemInfo={item}
-                        />
+                {inventory.map((inventoryItem) => (
+                    <li key={inventoryItem.id}>
+                        <WarehouseInventoryItem inventoryItem={inventoryItem} />
                     </li>
                 ))}
             </ul>
