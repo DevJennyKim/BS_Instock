@@ -7,7 +7,7 @@ import chevron from "../../assets/Icons/chevron_right-24px.svg";
 
 function WarehouseInventoryItem({ inventoryItem }) {
     console.log('Inventory item received:', inventoryItem);
-    const { item_name, category, status, quantity } =
+    const { item_name, category, status, quantity, id } =
         inventoryItem;
     return (
         <article key={inventoryItem.id} className="warehouse-details__inventory-row">
@@ -46,14 +46,14 @@ function WarehouseInventoryItem({ inventoryItem }) {
             </div>
 
             <div className="warehouse-details__icon-section">
-
                 <img
                     src={deleteIcon}
                     alt="delete button"
                     className="warehouse-details__icon"
+                
                 />
                 <Link
-                    to={`/edit-item/`} //need to get this done
+                    to={`/inventory/${id}/edit`} 
                     className="warehouse-table-row__icon-link"
                 >
                     <img

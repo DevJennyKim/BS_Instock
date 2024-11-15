@@ -2,6 +2,7 @@ import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
+//warehouse
 const getWarehouses = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/warehouses`);
@@ -52,4 +53,59 @@ const getInventoryByWarehouseId = async (warehouseId) => {
   }
 };
 
-export { getWarehouses, getWarehouseById, getInventories, getInventoryByWarehouseId };
+const addWarehouse = async (newWarehouse) => {
+  try {
+    const { data } = await axios.post(
+      `${baseUrl}/api/warehouses`,
+      newWarehouse
+    );
+    return data;
+  } catch (error) {
+    console.error("Could not add warehouse:", error);
+    throw new Error("Error adding warehouse.");
+  }
+};
+
+const updateWarehouse = async (updatedWarehouse, warehouseId) => {
+  try {
+    const { data } = await axios.put(
+      `${baseUrl}/api/warehouses/${warehouseId}`,
+      updatedWarehouse
+    );
+    return data;
+  } catch (error) {
+    console.error("Could not update warehouse:", error);
+    throw new Error("Error updating warehouse.");
+  }
+};
+
+const deleteWarehouse = async (warehouseId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/warehouses/${warehouseId}`);
+    return;
+  } catch (error) {
+    console.error("Could not delete warehouse:", error);
+    throw new Error("Error deleting warehouse.");
+  }
+};
+
+const deleteInventoryItem = async (inventoryItemId) => {
+  try {
+    await axios.delete(`${baseUrl}/api/inventories/${inventoryItemId}`);
+    return;
+  } catch (error) {
+    console.error("Could not delete inventory item:", error);
+    throw new Error("Error deleting inventory item.");
+  }
+};
+
+export {
+  getWarehouses,
+  getWarehouseById,
+  getInventories,
+  addWarehouse,
+  updateWarehouse,
+  deleteWarehouse,
+  deleteInventoryItem,
+  getInventoryByWarehouseId
+};

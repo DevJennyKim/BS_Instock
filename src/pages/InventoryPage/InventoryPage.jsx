@@ -1,11 +1,21 @@
 import "./inventoryPage.scss";
 import * as api from "../../api/instock-api";
+import TableHeader from "../../components/TableHeader/TableHeader";
 import InventoryTableRow from "../../components/InventoryTableRow/InventoryTableRow";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
 
 function InventoryPage() {
   const [inventoryList, setInventoryList] = useState([]);
+
+  const headerConfigs = [
+    "INVENTORY ITEM",
+    "CATEGORY",
+    "STATUS",
+    "QTY",
+    "WAREHOUSE",
+    "ACTIONS",
+  ];
 
   useEffect(() => {
     const loadInventoryList = async () => {
@@ -13,6 +23,10 @@ function InventoryPage() {
     };
     loadInventoryList();
   }, [inventoryList]);
+
+  const handleClick = useCallback((itemId) => {
+    api.deleteInventoryItem(itemId);
+  }, []);
 
   return (
     <section className="inventory-table">
@@ -25,17 +39,18 @@ function InventoryPage() {
             className="inventory-table__search-input"
           />
         </form>
-        <Link to="/add-item" className="inventory-table__button">
+        <Link to="/inventory/add" className="inventory-table__button">
           + Add New Item
         </Link>
       </div>
       <div className="inventory-table__column-headers">
-        <h3 className="inventory-table__header">INVENTORY ITEM</h3>
-        <h3 className="inventory-table__header">CATEGORY</h3>
-        <h3 className="inventory-table__header">STATUS</h3>
-        <h3 className="inventory-table__header">QTY</h3>
-        <h3 className="inventory-table__header">WAREHOUSE</h3>
-        <h3 className="inventory-table__header">ACTIONS</h3>
+        {headerConfigs.map((header) => (
+          <TableHeader
+            key={header}
+            tableName="inventory-table"
+            header={header}
+          />
+        ))}
       </div>
       <ul className="inventory-table__list">
         {inventoryList.map((inventory) => (
@@ -43,6 +58,7 @@ function InventoryPage() {
             <InventoryTableRow
               tableName="inventory-table"
               inventoryInfo={inventory}
+              handleClick={handleClick}
             />
           </li>
         ))}

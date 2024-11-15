@@ -1,11 +1,20 @@
 import "./WarehousePage.scss";
 import * as api from "../../api/instock-api";
+import TableHeader from "../../components/TableHeader/TableHeader";
 import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTableRow";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 
 function WarehousePage() {
   const [warehousesList, setWarehousesList] = useState([]);
+
+  const headerConfigs = [
+    "WAREHOUSE",
+    "ADDRESS",
+    "CONTACT NAME",
+    "CONTACT INFORMATION",
+    "ACTIONS",
+  ];
 
   useEffect(() => {
     const loadWarehousesList = async () => {
@@ -13,6 +22,10 @@ function WarehousePage() {
     };
     loadWarehousesList();
   }, [warehousesList]);
+
+  const handleClick = useCallback((warehouseId) => {
+    api.deleteWarehouse(warehouseId);
+  }, []);
 
   return (
     <section className="warehouse-table">
@@ -25,16 +38,18 @@ function WarehousePage() {
             className="warehouse-table__search-input"
           />
         </form>
-        <Link to="/add-warehouse" className="warehouse-table__button">
+        <Link to="/warehouses/add" className="warehouse-table__button">
           + Add New Warehouse
         </Link>
       </div>
       <div className="warehouse-table__column-headers">
-        <h3 className="warehouse-table__header">WAREHOUSE</h3>
-        <h3 className="warehouse-table__header">ADDRESS</h3>
-        <h3 className="warehouse-table__header">CONTACT NAME</h3>
-        <h3 className="warehouse-table__header">CONTACT INFORMATION</h3>
-        <h3 className="warehouse-table__header">ACTIONS</h3>
+        {headerConfigs.map((header) => (
+          <TableHeader
+            key={header}
+            tableName="warehouse-table"
+            header={header}
+          />
+        ))}
       </div>
       <ul className="warehouse-table__list">
         {warehousesList.map((warehouse) => (
@@ -42,6 +57,7 @@ function WarehousePage() {
             <WarehouseTableRow
               tableName="warehouse-table"
               warehouseInfo={warehouse}
+              handleClick={handleClick}
             />
           </li>
         ))}

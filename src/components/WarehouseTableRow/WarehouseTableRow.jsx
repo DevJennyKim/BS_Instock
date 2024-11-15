@@ -5,7 +5,7 @@ import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function WarehouseTableRow({ warehouseInfo }) {
+function WarehouseTableRow({ warehouseInfo, handleClick }) {
   const {
     id,
     warehouse_name,
@@ -58,9 +58,12 @@ function WarehouseTableRow({ warehouseInfo }) {
           src={deleteIcon}
           alt="delete button"
           className="warehouse-table-row__icon"
+          onClick={() => {
+            handleClick(id);
+          }}
         />
         <Link
-          to={`/edit-item/${id}`}
+          to={`/warehouses/${id}/edit`}
           className="warehouse-table-row__icon-link"
         >
           <img
@@ -78,4 +81,5 @@ export default WarehouseTableRow;
 
 WarehouseTableRow.propTypes = {
   warehouseInfo: PropTypes.object.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
