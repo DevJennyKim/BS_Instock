@@ -26,17 +26,9 @@ const getWarehouseById = async (id) => {
 };
 
 const getInventoryByWarehouseId = async (warehouseId) => {
-  console.log('Fetching inventory for warehouse:', warehouseId);
-  console.log(
-    'Full URL:',
-    `${baseUrl}/api/warehouses/${warehouseId}/inventories`
-  );
   try {
-    const response = await axios.get(
-      `${baseUrl}/api/warehouses/${warehouseId}/inventories`
-    );
-    console.log('Inventory response:', response.data);
-    return response.data;
+      const response = await axios.get(`${baseUrl}/api/warehouses/${warehouseId}/inventories`);
+      return response.data;
   } catch (error) {
     console.error('Error getting warehouse inventory:', error);
     console.error('Error details:', {
