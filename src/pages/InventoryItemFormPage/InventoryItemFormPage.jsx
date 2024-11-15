@@ -32,7 +32,6 @@ function InventoryItemFormPage({ action }) {
     const fetchWarehouses = async () => {
       try {
         const warehouseData = await api.getWarehouses();
-        console.log(warehouseData);
         setWarehouses(warehouseData);
       } catch (error) {
         console.error('Failed to load warehouses', error);
@@ -40,6 +39,39 @@ function InventoryItemFormPage({ action }) {
     };
     fetchWarehouses();
   }, []);
+
+  useEffect(() => {
+    if (action === 'update' && id && warehouses.length > 0) {
+      const fetchInventoryItem = async () => {
+        try {
+          const itemData = await api.getInventoryItemById(id);
+          console.log('itemData:', itemData);
+          console.log('itemData.warehouse_id:', itemData.warehouse_id);
+          const warehouse = warehouses.find(
+            (w) => w.id === itemData.warehouse_id
+          );
+          console.log('warehouses', warehouses);
+          console.log('warehouse', warehouse);
+          setFormData({
+            warehouse_id: itemData.warehouse_id
+              ? itemData.warehouse_id.toString()
+              : '',
+
+            item_name: itemData.item_name,
+            description: itemData.description,
+            category: itemData.category,
+            status: itemData.status,
+            quantity: itemData.quantity ? itemData.quantity.toString() : '0',
+            warehouse_name: warehouse ? warehouse.warehouse_name : '',
+          });
+          console.log(warehouse);
+        } catch (error) {
+          console.error('Failed to load inventory item', error);
+        }
+      };
+      fetchInventoryItem();
+    }
+  }, [action, id, warehouses]);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -106,7 +138,9 @@ function InventoryItemFormPage({ action }) {
           className="inventory-item__header-arrow"
           onClick={() => navigate(-1)}
         />
-        <h1 className="inventory-item__header-title">Add New Inventory Item</h1>
+        <h1 className="inventory-item__header-title">
+          {action === 'add' ? 'Add New Inventory Item' : 'Edit Inventory Item'}
+        </h1>
       </div>
       <form onSubmit={handleSubmit} className="inventory-item__form">
         <div className="inventory-item__container">
