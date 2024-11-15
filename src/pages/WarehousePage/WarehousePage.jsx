@@ -42,7 +42,7 @@ function WarehousePage() {
           + Add New Warehouse
         </Link>
       </div>
-      <div className="warehouse-table__column-headers">
+      {/* <div className="warehouse-table__column-headers">
         {headerConfigs.map((header) => (
           <TableHeader
             key={header}
@@ -50,7 +50,8 @@ function WarehousePage() {
             header={header}
           />
         ))}
-      </div>
+      </div> */}
+      <TableHeader headers={headerConfigs} />
       <ul className="warehouse-table__list">
         {warehousesList.map((warehouse) => (
           <li key={warehouse.id}>
