@@ -1,0 +1,112 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/global" as *;
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.75);
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    z-index:10;
+  }
+  .modal {
+    position: relative;
+    background: white;
+    padding: 2rem 3rem;
+    max-width: 500px;
+    width: 90%;
+    border-radius: 4px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  
+    h2 {
+      color: $graphite;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+      text-align: left;
+    }
+  
+    p {
+      text-align: left;
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .modal__close-button{
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        position: absolute;
+        top: 0.8rem;
+        right: 1rem;
+        
+      }
+  }
+  .modal__content{
+    text-align: left;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 20rem;
+
+    @include tablet {
+        padding-bottom: 0rem;
+    }
+    
+    @include desktop {
+
+      padding-bottom: 0rem;
+
+    }
+    
+  }
+  .modal__buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    gap: 1rem;
+    @include tablet{
+      justify-content: flex-end;
+    }
+    @include desktop{
+      justify-content: flex-end;
+    }
+    
+    .modal__button {
+        width: 100%;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+      
+      &--cancel {
+        background-color: $white;
+        border: 1px solid $slate;
+        color: $slate;
+  
+        &:hover {
+          border: 1px solid $instock-indigo;
+          color: $instock-indigo;
+        }
+      }
+  
+      &--confirm {
+        background-color: $red;
+        color: white;
+  
+        &:hover {
+          background-color: darken($graphite, 5%);
+        }
+      }
+      @include tablet{
+        width: 20%;
+      }
+      @include desktop{
+        width: 20%;
+
+      }
+    }
+  }
