@@ -3,10 +3,22 @@ import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import "./WarehouseInventoryItem.scss";
 import { Link } from "react-router-dom";
+import { useCallback } from 'react';
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
+import * as api from "../../api/instock-api";
 
-function WarehouseInventoryItem({ inventoryItem }) {
-    console.log('Inventory item received:', inventoryItem);
+function WarehouseInventoryItem({ inventoryItem, onDeleteSuccess }) {
+    const handleClick = useCallback(async (itemId) => {
+        try {
+            await api.deleteInventoryItem(itemId);
+            if (onDeleteSuccess) {
+                onDeleteSuccess(itemId);
+            }
+        } catch (error) {
+            console.error("Failed to delete inventory item:", error);
+        }
+    }, [onDeleteSuccess]);
+
     const { item_name, category, status, quantity, id } =
         inventoryItem;
     return (
@@ -50,6 +62,8 @@ function WarehouseInventoryItem({ inventoryItem }) {
                     src={deleteIcon}
                     alt="delete button"
                     className="warehouse-details__icon"
+                    onClick={() => handleClick(id)}
+                    style={{ cursor: 'pointer' }}
                 
                 />
                 <Link
@@ -68,6 +82,7 @@ function WarehouseInventoryItem({ inventoryItem }) {
 }
 WarehouseInventoryItem.propTypes = {
     inventoryItem: PropTypes.object.isRequired,
+    onDeleteSuccess: PropTypes.func.isRequired
 };
 
 export default WarehouseInventoryItem;
