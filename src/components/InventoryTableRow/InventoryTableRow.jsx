@@ -4,10 +4,22 @@ import editIcon from "../../assets/Icons/edit-24px.svg";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import DeletePopup from "../DeletePopup/DeletePopup";
 
 function InventoryTableRow({ inventoryInfo, handleClick }) {
   const { warehouse_name, item_name, category, status, quantity, id } =
     inventoryInfo;
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
+  const confirmDelete = () => {
+    handleClick(id);
+    closeModal();
+  };
   return (
     <article className={`inventory-table-row`}>
       <div className="inventory-table-row__detail-container">
@@ -59,9 +71,7 @@ function InventoryTableRow({ inventoryInfo, handleClick }) {
           src={deleteIcon}
           alt="delete button"
           className="inventory-table-row__icon"
-          onClick={() => {
-            handleClick(id);
-          }}
+          onClick={openModal}
         />
         <Link
           to={`/inventory/${id}/edit`}
@@ -74,6 +84,13 @@ function InventoryTableRow({ inventoryInfo, handleClick }) {
           />
         </Link>
       </div>
+      <DeletePopup
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={confirmDelete}
+        title={`Delete ${item_name} inventory item?`}
+        content={`Please confirm that you'd like to delete ${item_name} from the inventory list. You won't be able to undo this action.`}
+      />
     </article>
   );
 }

@@ -81,13 +81,7 @@
       border-radius: 1rem;
       font-size: 1rem;
       cursor: pointer;
-      @include tablet{
-        width: 20%;
-      }
-      @include desktop{
-        width: 20%;
-
-      }
+      
       &--cancel {
         background-color: $white;
         border: 1px solid $slate;
@@ -106,6 +100,13 @@
         &:hover {
           background-color: darken($graphite, 5%);
         }
+      }
+      @include tablet{
+        width: 20%;
+      }
+      @include desktop{
+        width: 20%;
+
       }
     }
   }
