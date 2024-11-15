@@ -14,22 +14,24 @@ function WarehouseInventoryItem({ inventoryItem }) {
             <div className="warehouse-details__item-section">
                 <h4 className="warehouse-details__section-label">INVENTORY ITEM</h4>
                 <div className="warehouse-details__info-section">
-                    <p className="warehouse-details__text warehouse-details__text--item">{item_name}</p>
-                    <img
-                        src={chevron}
-                        alt="chevron"
-                        className="warehouse-table-row__icon--small"
-                    />
+                <Link to={`/inventory/${inventoryItem.id}`} className="warehouse-details__item-link">
+                        <span className="warehouse-details__text warehouse-details__text--item">{item_name}</span>
+                        <img
+                            src={chevron}
+                            alt="chevron"
+                            className="warehouse-details__chevron"
+                        />
+                    </Link>
                 </div>
             </div>
 
             <div className="warehouse-details__item-section">
                 <h4 className="warehouse-details__section-label">STATUS</h4>
-                <p className={`warehouse-details__status ${status.toLowerCase() === "in stock"
+                <p className={`warehouse-details__status ${status === "In Stock"
                     ? "warehouse-details__status--in-stock"
                     : "warehouse-details__status--out-of-stock"
                     }`}>
-                    {status}
+                    {status.toUpperCase()}
                 </p>
             </div>
 
@@ -39,7 +41,7 @@ function WarehouseInventoryItem({ inventoryItem }) {
             </div>
 
             <div className="warehouse-details__item-section">
-                <h4 className="warehouse-details__section-label">QUANTITY</h4>
+                <h4 className="warehouse-details__section-label">QTY</h4>
                 <p className="warehouse-details__text">{quantity}</p>
             </div>
 

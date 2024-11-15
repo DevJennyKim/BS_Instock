@@ -91,9 +91,9 @@
     &__info {
         display: flex;
         flex-direction: column;
-        padding: 1rem 0.625rem;
+        padding: 16px 16px 16px 16px;
         gap: 1.5rem;
-        border-bottom: 0.0625rem solid $cloud;
+        // border-bottom: 0.0625rem solid $cloud;
 
         @include tablet {
             flex-direction: row;

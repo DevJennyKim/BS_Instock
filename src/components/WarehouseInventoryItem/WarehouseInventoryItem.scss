@@ -17,7 +17,7 @@
 
         @include desktop {
             &:hover {
-                background-color: #2e66e512;
+                background-color: $indigo-opacity7;
             }
         }
 
@@ -47,10 +47,31 @@
             }
         }
     }
-    &__info-section{
+    &__status{
+        &--out-of-stock{
+            @include out-of-stock
+        }
+        &--in-stock{
+            @include in-stock
+        }
+    }
+
+    &__item-link {
         display: flex;
-        flex-wrap: nowrap;
-        gap: 4px;
+        align-items: center;
+
+        &:hover {
+            .warehouse-details__text--item {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__chevron {
+        width: 1rem;
+        height: 1rem;
+        display: inline-block;
+        vertical-align: middle;
     }
 
     &__icon-section {
@@ -84,6 +105,7 @@
         &--item {
             @include h3-labels-links-button-mobile;
             color: $instock-indigo;
+            width: auto;
 
             @include tablet {
                 @include h3-labels-links-button-desktop;
@@ -113,20 +135,3 @@
 }
 
 
-
-
-
-
-//     &__icon {
-//       width: 1.5rem;
-//       cursor: pointer;
-
-//       &--small {
-//         width: 1.25rem;
-//       }
-//     }
-
-//     &__icon-link {
-//       height: 1.5rem;
-//     }
-//   }
