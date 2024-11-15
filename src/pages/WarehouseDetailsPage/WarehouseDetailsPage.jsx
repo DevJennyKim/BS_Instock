@@ -4,10 +4,12 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
+import WarehouseInventoryItem from "../../components/WarehouseInventoryItem/WarehouseInventoryItem";
 import TableHeader from "../../components/TableHeader/TableHeader";
 
 function WarehouseDetailsPage() {
   const [warehouseDetails, setWarehouseDetails] = useState(null);
+  const [inventory, setInventory] = useState([]);
   const { id } = useParams();
 
   const headerConfigs = [
@@ -19,15 +21,19 @@ function WarehouseDetailsPage() {
   ];
 
   useEffect(() => {
-    const getWarehouseDetails = async () => {
+    const fetchData = async () => {
+      console.log("hello");
       try {
-        const response = await api.getWarehouseById(id);
-        setWarehouseDetails(response);
+        const warehouseResponse = await api.getWarehouseById(id);
+        setWarehouseDetails(warehouseResponse);
+
+        const inventoryResponse = await api.getInventoryByWarehouseId(id);
+        setInventory(inventoryResponse);
       } catch (error) {
-        console.error("Error loading warehouse details:", error);
+        console.error("Error loading warehouse data:", error);
       }
     };
-    getWarehouseDetails();
+    fetchData();
   }, [id]);
 
   if (!warehouseDetails) {
@@ -35,7 +41,6 @@ function WarehouseDetailsPage() {
       <div className="warehouse-details__error">No warehouse details found</div>
     );
   }
-
   return (
     <section className="warehouse-details">
       <div className="warehouse-details__header-container">
@@ -90,9 +95,9 @@ function WarehouseDetailsPage() {
         <TableHeader headers={headerConfigs} />
       </div>
       <ul className="warehouse-details__list">
-        {warehouseDetails.inventory?.map((item) => (
-          <li key={item.id}>
-            <WarehouseInventoryItem itemInfo={item} />
+        {inventory.map((inventoryItem) => (
+          <li key={inventoryItem.id}>
+            <WarehouseInventoryItem inventoryItem={inventoryItem} />
           </li>
         ))}
       </ul>

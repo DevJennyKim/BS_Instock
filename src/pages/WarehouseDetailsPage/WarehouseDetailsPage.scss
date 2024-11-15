@@ -17,10 +17,6 @@
       align-items: center;
       padding: 0.5rem 2rem;
     }
-
-    @include desktop {
-      padding-left: 5.3125rem;
-    }
   }
 
   &__column-header-container {
@@ -91,7 +87,7 @@
   &__info {
     display: flex;
     flex-direction: column;
-    padding: 1rem 0.625rem;
+    padding: 16px 16px 16px 16px;
     gap: 1.5rem;
     border-bottom: 0.0625rem solid $cloud;
 
@@ -104,7 +100,7 @@
     }
 
     @include desktop {
-      padding: 1.5rem 5.3125rem;
+      padding: 1.5rem 2rem;
       gap: 3.75rem;
     }
   }
