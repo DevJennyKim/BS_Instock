@@ -83,18 +83,12 @@
     width: 100%;
     resize: none;
 
-    &:focus {
-      border: none;
-      outline: 1px solid $instock-indigo;
-    }
+    @include input_focus;
     &--textarea {
       height: 120px;
       width: 100%;
       line-height: 31px;
-      &:focus {
-        border: none;
-        outline: 1px solid $instock-indigo;
-      }
+      @include input_focus;
     }
 
     &--err {

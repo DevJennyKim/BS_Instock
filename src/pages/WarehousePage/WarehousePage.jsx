@@ -1,19 +1,19 @@
-import "./WarehousePage.scss";
-import * as api from "../../api/instock-api";
-import TableHeader from "../../components/TableHeader/TableHeader";
-import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTableRow";
-import { Link } from "react-router-dom";
-import { useEffect, useState, useCallback } from "react";
+import './WarehousePage.scss';
+import * as api from '../../api/instock-api';
+import TableHeader from '../../components/TableHeader/TableHeader';
+import WarehouseTableRow from '../../components/WarehouseTableRow/WarehouseTableRow';
+import { Link } from 'react-router-dom';
+import { useEffect, useState, useCallback } from 'react';
 
 function WarehousePage() {
   const [warehousesList, setWarehousesList] = useState([]);
 
   const headerConfigs = [
-    "WAREHOUSE",
-    "ADDRESS",
-    "CONTACT NAME",
-    "CONTACT INFORMATION",
-    "ACTIONS",
+    'WAREHOUSE',
+    'ADDRESS',
+    'CONTACT NAME',
+    'CONTACT INFORMATION',
+    'ACTIONS',
   ];
 
   useEffect(() => {
@@ -42,15 +42,6 @@ function WarehousePage() {
           + Add New Warehouse
         </Link>
       </div>
-      {/* <div className="warehouse-table__column-headers">
-        {headerConfigs.map((header) => (
-          <TableHeader
-            key={header}
-            tableName="warehouse-table"
-            header={header}
-          />
-        ))}
-      </div> */}
       <TableHeader headers={headerConfigs} />
       <ul className="warehouse-table__list">
         {warehousesList.map((warehouse) => (
