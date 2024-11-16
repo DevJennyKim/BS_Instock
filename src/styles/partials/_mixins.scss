@@ -177,7 +177,6 @@
     border: none;
     outline: 1px solid $instock-indigo;
     background-color: $white;
-    // border: 1px solid $instock-indigo;
   }
 
   &::placeholder {
@@ -222,9 +221,3 @@
     @include table-header-desktop;
   }
 }
-
-// @mixin input_focus {
-//   &:focus {
-//
-//   }
-// }

@@ -103,6 +103,9 @@ function TablePage({ page }) {
     const safeText = text
       ? text.toString().toLowerCase().replace(/\s+/g, '')
       : '';
+
+    console.log(safeText);
+
     return safeText.includes(keyword);
   };
 
@@ -140,6 +143,11 @@ function TablePage({ page }) {
             className="table__search-input"
             onChange={handleChange}
           />
+          <div className="table__suggestion-box">
+            <div className="table__suggestion-word">A</div>
+            <div className="table__suggestion-word">B</div>
+            <div className="table__suggestion-word">C</div>
+          </div>
         </form>
         <Link
           to={page === 'warehouses' ? '/warehouses/add' : '/inventory/add'}

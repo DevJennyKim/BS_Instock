@@ -32,10 +32,12 @@
       gap: 0.75rem;
     }
   }
-
+  &__search {
+    position: relative;
+  }
   &__search-input {
     width: 100%;
-
+    z-index: 10;
     @include form-field;
     background-image: url('../../assets/Icons/search-24px.svg');
     background-position: right 0.625rem center;
@@ -43,6 +45,28 @@
 
     @include tablet {
       max-width: 11.5625rem;
+    }
+  }
+
+  &__suggestion-box {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 5px 0;
+    padding: 0.5rem 0;
+    background-color: white;
+    border: 1px solid rgb(236, 236, 236);
+    border-top: none;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  }
+
+  &__suggestion-word {
+    padding: 0 0.5rem;
+    &:hover {
+      background-color: rgb(243, 243, 243);
     }
   }
 
