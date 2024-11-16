@@ -32,10 +32,9 @@
       gap: 0.75rem;
     }
   }
-
   &__search-input {
     width: 100%;
-
+    z-index: 10;
     @include form-field;
     background-image: url('../../assets/Icons/search-24px.svg');
     background-position: right 0.625rem center;
@@ -45,7 +44,6 @@
       max-width: 11.5625rem;
     }
   }
-
   &__button {
     width: 100%;
     @include button-primary;
