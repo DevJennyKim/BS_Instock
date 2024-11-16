@@ -33,16 +33,18 @@
     align-items: flex-end;
     gap: 0.5rem;
     padding: 1.25rem 0px;
+
+    &:hover {
+      .item-details-page__back-icon {
+          transform: translateX(-4px);
+      }
+  }
   }
 
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translateX(-4px);
-    }
   }
 
   &__title {
@@ -50,9 +52,9 @@
     color: $instock-black;
 
     @include tablet {
-      @include h1-desktop;
+        @include h1-desktop;
     }
-  }
+}
 
   &__edit-button {
     display: flex;

@@ -68,10 +68,11 @@
     &__item-link {
         display: flex;
         align-items: center;
+        cursor: pointer;
 
         &:hover {
-            .warehouse-details__text--item {
-                text-decoration: underline;
+            .warehouse-details__chevron {
+                transform: translateX(4px);
             }
         }
     }

@@ -33,16 +33,18 @@
         align-items: flex-end;
         gap: 0.5rem;
         padding: 1.25rem 0px;
+
+        &:hover {
+            .warehouse-details__back-icon {
+                transform: translateX(-4px);
+            }
+        }
     }
 
     &__back-icon {
         width: 1.5rem;
         height: 1.5rem;
         transition: transform 0.2s ease;
-
-        &:hover {
-            transform: translateX(-4px);
-        }
     }
 
     &__title {
