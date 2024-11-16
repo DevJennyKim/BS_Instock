@@ -1,6 +1,6 @@
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/global" as *;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/global' as *;
 
 .warehouse-page {
   &__title {
@@ -43,10 +43,6 @@
     @include form-field;
     width: 100%;
     margin-bottom: 1rem;
-    &:focus {
-      border: none;
-      outline: 0.0625rem solid $instock-indigo;
-    }
   }
 
   &__label {

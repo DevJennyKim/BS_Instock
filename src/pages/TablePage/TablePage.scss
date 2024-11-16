@@ -1,9 +1,9 @@
-@use "../../styles/partials/global" as *;
-@use "../../styles/partials/mixins" as *;
-@use "../../styles/partials/variables" as *;
+@use '../../styles/partials/global' as *;
+@use '../../styles/partials/mixins' as *;
+@use '../../styles/partials/variables' as *;
 
-.inventory-table {
-  border-radius: 0.1875rem;
+.table {
+  border-radius: 3px;
   height: 80%;
   margin: 0 auto;
   background-color: $white;
@@ -35,8 +35,9 @@
 
   &__search-input {
     width: 100%;
+
     @include form-field;
-    background-image: url("../../assets/Icons/search-24px.svg");
+    background-image: url('../../assets/Icons/search-24px.svg');
     background-position: right 0.625rem center;
     background-repeat: no-repeat;
 

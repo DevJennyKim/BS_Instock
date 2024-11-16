@@ -1,13 +1,13 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Header from "./components/Header/Header";
-import Footer from "./components/Footer/Footer";
-import "./App.scss";
-import TablePage from "./pages/TablePage/TablePage";
-import WarehouseFormPage from "./pages/WarehouseFormPage/WarehouseFormPage";
-import WarehouseDetailsPage from "./pages/WarehouseDetailsPage/WarehouseDetailsPage";
-import InventoryItemFormPage from "./pages/InventoryItemFormPage/InventoryItemFormPage";
-import ItemDetailsPage from "./pages/ItemDetailsPage/ItemDetailsPage";
-import NotfoundPage from "./pages/NotfoundPage/NotfoundPage";
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
+import './App.scss';
+import TablePage from './pages/TablePage/TablePage';
+import WarehouseFormPage from './pages/WarehouseFormPage/WarehouseFormPage';
+import WarehouseDetailsPage from './pages/WarehouseDetailsPage/WarehouseDetailsPage';
+import InventoryItemFormPage from './pages/InventoryItemFormPage/InventoryItemFormPage';
+import ItemDetailsPage from './pages/ItemDetailsPage/ItemDetailsPage';
+import NotfoundPage from './pages/NotfoundPage/NotfoundPage';
 
 function App() {
   return (
