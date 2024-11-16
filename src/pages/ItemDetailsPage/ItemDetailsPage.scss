@@ -36,6 +36,7 @@
 
     &:hover {
       .item-details-page__back-icon {
+        cursor: pointer;
         transform: translateX(-0.25rem);
       }
     }

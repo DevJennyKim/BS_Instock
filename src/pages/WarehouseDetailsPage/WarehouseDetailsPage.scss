@@ -36,6 +36,7 @@
 
     &:hover {
       .warehouse-details__back-icon {
+        cursor: pointer;
         transform: translateX(-0.25rem);
       }
     }
@@ -44,6 +45,7 @@
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
+    cursor: pointer;
     transition: transform 0.2s ease;
   }
 
