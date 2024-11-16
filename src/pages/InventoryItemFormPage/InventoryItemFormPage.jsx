@@ -111,7 +111,7 @@ function InventoryItemFormPage({ action }) {
       icon: 'warning',
       title: 'Redirecting to previous page',
       didClose: () => {
-        navigate('/');
+        navigate('/inventory');
       },
     });
   };
@@ -132,7 +132,7 @@ function InventoryItemFormPage({ action }) {
             timer: 1500,
             showConfirmButton: false,
             didClose: () => {
-              navigate('/');
+              navigate('/inventory');
             },
           });
         } else if (action === 'update') {
@@ -146,7 +146,7 @@ function InventoryItemFormPage({ action }) {
             timer: 1200,
             showConfirmButton: false,
             didClose: () => {
-              navigate('/');
+              navigate('/inventory');
             },
           });
         }
