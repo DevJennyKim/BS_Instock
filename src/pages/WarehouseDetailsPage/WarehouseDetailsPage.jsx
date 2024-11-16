@@ -140,6 +140,11 @@ function WarehouseDetailsPage() {
               />
             </li>
           ))}
+        {!inventory.length && (
+          <p className="warehouse-details__message">
+            This warehouse does not have any inventory yet.
+          </p>
+        )}
       </ul>
       <DeletePopup
         isOpen={isModalOpen}
