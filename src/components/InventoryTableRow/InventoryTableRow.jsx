@@ -1,11 +1,11 @@
-import "./InventoryTableRow.scss";
-import deleteIcon from "../../assets/Icons/delete_outline-24px.svg";
-import editIcon from "../../assets/Icons/edit-24px.svg";
-import chevron from "../../assets/Icons/chevron_right-24px.svg";
-import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import DeletePopup from "../DeletePopup/DeletePopup";
+import './InventoryTableRow.scss';
+import deleteIcon from '../../assets/Icons/delete_outline-24px.svg';
+import editIcon from '../../assets/Icons/edit-24px.svg';
+import chevron from '../../assets/Icons/chevron_right-24px.svg';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import DeletePopup from '../DeletePopup/DeletePopup';
 
 function InventoryTableRow({ inventoryInfo, handleClick }) {
   const { warehouse_name, item_name, category, status, quantity, id } =
@@ -42,12 +42,12 @@ function InventoryTableRow({ inventoryInfo, handleClick }) {
         <h3 className={`inventory-table-row__label`}>STATUS</h3>
         <p
           className={`inventory-table-row__detail ${
-            status === "In Stock"
-              ? "inventory-table-row__detail--in-stock"
-              : "inventory-table-row__detail--out-of-stock"
+            status === 'In Stock'
+              ? 'inventory-table-row__detail--in-stock'
+              : 'inventory-table-row__detail--out-of-stock'
           }`}
         >
-          {status.toUpperCase()}
+          {status && status.toUpperCase()}
         </p>
       </div>
 
