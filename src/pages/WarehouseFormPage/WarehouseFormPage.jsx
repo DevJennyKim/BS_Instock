@@ -99,7 +99,7 @@ function WarehouseForm({ action }) {
       timer: 1200,
       timerProgressBar: true,
       icon: 'warning',
-      title: 'Redirecting to homepage',
+      title: 'Redirecting to previous page',
       didClose: () => {
         navigate('/');
       },
