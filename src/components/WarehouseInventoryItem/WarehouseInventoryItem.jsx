@@ -5,7 +5,7 @@ import "./WarehouseInventoryItem.scss";
 import { Link } from "react-router-dom";
 import chevron from "../../assets/Icons/chevron_right-24px.svg";
 
-function WarehouseInventoryItem({ inventoryItem, handleDelete }) {
+function WarehouseInventoryItem({ inventoryItem, handleClick }) {
   const { item_name, category, status, quantity, id } = inventoryItem;
   return (
     <article
@@ -59,7 +59,7 @@ function WarehouseInventoryItem({ inventoryItem, handleDelete }) {
           src={deleteIcon}
           alt="delete button"
           className="warehouse-details__icon"
-          onClick={() => handleDelete(id)}
+          onClick={() => handleClick(id)}
           style={{ cursor: "pointer" }}
         />
         <Link
@@ -78,7 +78,7 @@ function WarehouseInventoryItem({ inventoryItem, handleDelete }) {
 }
 WarehouseInventoryItem.propTypes = {
   inventoryItem: PropTypes.object.isRequired,
-  handleDelete: PropTypes.func.isRequired,
+  handleClick: PropTypes.func.isRequired,
 };
 
 export default WarehouseInventoryItem;

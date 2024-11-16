@@ -1,5 +1,6 @@
 import ReactModal from "react-modal";
 import PropTypes from "prop-types";
+import closeIcon from "../../assets/Icons/close-24px.svg";
 import "./DeletePopup.scss";
 
 ReactModal.setAppElement("#root");
@@ -13,15 +14,15 @@ function DeletePopup({ isOpen, onClose, onConfirm, title, content }) {
       overlayClassName="modal-overlay"
     >
       <div className="modal__header">
-      <h2 className="modal__title">{title}</h2>
-      <img
-        src="src/assets/Icons/close-24px.svg"
-        alt="close-icon"
-        className="modal__close-button"
-        aria-label="Close"
-        onClick={onClose}
-      ></img>
-      <div className="modal__content">{content}</div>
+        <h2 className="modal__title">{title}</h2>
+        <img
+          src={closeIcon}
+          alt="close-icon"
+          className="modal__close-button"
+          aria-label="Close"
+          onClick={onClose}
+        ></img>
+        <div className="modal__content">{content}</div>
       </div>
       <div className="modal__buttons">
         <button

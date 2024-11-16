@@ -1,17 +1,33 @@
 import "./WarehouseDetailsPage.scss";
 import * as api from "../../api/instock-api";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 import WarehouseInventoryItem from "../../components/WarehouseInventoryItem/WarehouseInventoryItem";
 import TableHeader from "../../components/TableHeader/TableHeader";
+import DeletePopup from "../../components/DeletePopup/DeletePopup";
 
 function WarehouseDetailsPage() {
+  const { id } = useParams();
   const [warehouseDetails, setWarehouseDetails] = useState(null);
   const [inventory, setInventory] = useState([]);
   const [isAscending, setIsAscending] = useState(true);
-  const { id } = useParams();
+  const [deletedItemId, setDeletedItemId] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletedItem, setDeletedItem] = useState({});
+
+  const openModal = (itemId) => {
+    setIsModalOpen(true);
+    setDeletedItemId(itemId);
+    const foundItem = inventory.find((item) => item.id === itemId);
+    setDeletedItem(foundItem);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setDeletedItemId(null);
+    setDeletedItem({});
+  };
 
   const headerConfigs = [
     { text: "INVENTORY ITEM", property: "item_name" },
@@ -36,6 +52,13 @@ function WarehouseDetailsPage() {
     fetchData();
   }, [id]);
 
+  const handleDelete = async () => {
+    await api.deleteInventoryItem(deletedItemId);
+    closeModal();
+    const inventoryResponse = await api.getInventoryByWarehouseId(id);
+    setInventory(inventoryResponse);
+  };
+
   const handleSort = async (property) => {
     const newOrder = !isAscending;
     setIsAscending(newOrder);
@@ -47,15 +70,6 @@ function WarehouseDetailsPage() {
     );
     setInventory(filteredData);
   };
-
-  const handleDelete = useCallback(
-    async (itemId) => {
-      await api.deleteInventoryItem(itemId);
-      const inventoryResponse = await api.getInventoryByWarehouseId(id);
-      setInventory(inventoryResponse);
-    },
-    [id]
-  );
 
   if (!warehouseDetails) {
     return (
@@ -122,11 +136,18 @@ function WarehouseDetailsPage() {
             <li key={inventoryItem.id}>
               <WarehouseInventoryItem
                 inventoryItem={inventoryItem}
-                handleDelete={handleDelete}
+                handleClick={openModal}
               />
             </li>
           ))}
       </ul>
+      <DeletePopup
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        onConfirm={handleDelete}
+        title={`Delete ${deletedItem.item_name} inventory item?`}
+        content={`Please confirm that you'd like to delete ${deletedItem.item_name} from the inventory list. You won't be able to undo this action.`}
+      />
     </section>
   );
 }
