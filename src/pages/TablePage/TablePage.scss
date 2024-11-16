@@ -3,7 +3,7 @@
 @use "../../styles/partials/variables" as *;
 
 .inventory-table {
-  border-radius: 3px;
+  border-radius: 0.1875rem;
   height: 80%;
   margin: 0 auto;
   background-color: $white;
@@ -37,7 +37,7 @@
     width: 100%;
     @include form-field;
     background-image: url("../../assets/Icons/search-24px.svg");
-    background-position: right 10px center;
+    background-position: right 0.625rem center;
     background-repeat: no-repeat;
 
     @include tablet {

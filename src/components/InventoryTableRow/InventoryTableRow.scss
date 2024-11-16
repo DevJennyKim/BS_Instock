@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  border-top: 1.25px solid $cloud;
+  border-top: 0.0781rem solid $cloud;
   padding: 1rem;
 
   @include tablet {
@@ -25,7 +25,13 @@
   &__warehouse-container {
     display: flex;
     flex-wrap: nowrap;
-    gap: 4px;
+    gap: 0.25rem;
+
+    &:hover {
+      .inventory-table-row__icon--small {
+        transform: translateX(0.25rem);
+      }
+    }
   }
 
   &__detail-container {
@@ -142,10 +148,6 @@
     &--small {
       width: 1.25rem;
       transition: transform 0.2s ease;
-
-      &:hover {
-        transform: translateX(4px);
-      }
     }
   }
 
