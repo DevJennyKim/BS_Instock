@@ -9,53 +9,71 @@ import WarehouseTableRow from "../../components/WarehouseTableRow/WarehouseTable
 
 function TablePage({ page }) {
   const [tableData, setTableData] = useState([]);
+  const [isAscending, setIsAscending] = useState(true);
 
   const inventoryHeaders = [
-    "INVENTORY ITEM",
-    "CATEGORY",
-    "STATUS",
-    "QTY",
-    "WAREHOUSE",
-    "ACTIONS",
+    { text: "INVENTORY ITEM", property: "item_name" },
+    { text: "CATEGORY", property: "category" },
+    { text: "STATUS", property: "status" },
+    { text: "QTY", property: "quantity" },
+    { text: "WAREHOUSE", property: "warehouse_name" },
+    { text: "ACTIONS", property: "" },
   ];
 
   const warehouseHeaders = [
-    "WAREHOUSE",
-    "ADDRESS",
-    "CONTACT NAME",
-    "CONTACT INFORMATION",
-    "ACTIONS",
+    { text: "WAREHOUSE", property: "warehouse_name" },
+    { text: "ADDRESS", property: "address" },
+    { text: "CONTACT NAME", property: "contact_name" },
+    { text: "CONTACT INFORMATION", property: "contact_email" },
+    { text: "ACTIONS", property: "" },
   ];
+
+  const loadData = async (endpoint) => {
+    const data = await endpoint();
+    setTableData(data);
+  };
 
   useEffect(() => {
     const loadTableData = async () => {
-      setTableData([]);
-
-      let data = [];
-
       if (page === "warehouses") {
-        data = await api.getWarehouses();
+        loadData(api.getWarehouses);
       } else if (page === "inventory") {
-        data = await api.getInventories();
+        loadData(api.getInventories);
       }
-
-      setTableData(data);
     };
     loadTableData();
   }, [page]);
 
-  const handleClick = useCallback(
+  const handleDelete = useCallback(
     async (id) => {
       if (page === "warehouses") {
         await api.deleteWarehouse(id);
-        setTableData(await api.getWarehouses());
+        loadData(api.getWarehouses);
       } else if (page === "inventory") {
         await api.deleteInventoryItem(id);
-        setTableData(await api.getInventories());
+        loadData(api.getInventories);
       }
     },
     [page]
   );
+
+  const handleSort = async (property) => {
+    const newOrder = !isAscending;
+    setIsAscending(newOrder);
+    const order = newOrder ? "asc" : "desc";
+
+    if (page === "warehouses") {
+      const sortedData = await api.getSortedWarehouses(property, order);
+      setTableData(sortedData);
+    }
+
+    if (page === "inventory") {
+      const sortedData = await api.getSortedInventories(property, order);
+      setTableData(sortedData);
+    }
+  };
+
+  const headers = page === "warehouses" ? warehouseHeaders : inventoryHeaders;
 
   return (
     <section className="inventory-table">
@@ -78,9 +96,7 @@ function TablePage({ page }) {
         </Link>
       </div>
 
-      <TableHeader
-        headers={page === "warehouses" ? warehouseHeaders : inventoryHeaders}
-      />
+      <TableHeader headers={headers} handleClick={handleSort} />
       <ul className="inventory-table__list">
         {page === "warehouses" &&
           tableData[0]?.address &&
@@ -88,7 +104,7 @@ function TablePage({ page }) {
             <li key={data.id}>
               <WarehouseTableRow
                 warehouseInfo={data}
-                handleClick={handleClick}
+                handleClick={handleDelete}
               />
             </li>
           ))}
@@ -98,7 +114,7 @@ function TablePage({ page }) {
             <li key={data.id}>
               <InventoryTableRow
                 inventoryInfo={data}
-                handleClick={handleClick}
+                handleClick={handleDelete}
               />
             </li>
           ))}

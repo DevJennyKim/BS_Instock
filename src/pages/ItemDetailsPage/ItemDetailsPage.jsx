@@ -1,12 +1,13 @@
 import "./ItemDetailsPage.scss";
 import * as api from "../../api/instock-api";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import editIcon from "../../assets/Icons/edit-24px.svg";
 
 function ItemDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [itemDetails, setItemDetails] = useState(null);
 
   useEffect(() => {
@@ -34,13 +35,14 @@ function ItemDetailsPage() {
     <section className={`item-details-page`}>
       <div className={`item-details-page__header-container`}>
         <div className={`item-details-page__title-wrapper`}>
-          <Link to="/inventory">
+          <div>
             <img
               src={backIcon}
               alt="back"
               className={`item-details-page__back-icon`}
+              onClick={() => navigate(-1)}
             />
-          </Link>
+          </div>
           <h1 className={`item-details-page__title`}>
             {itemDetails.item_name}
           </h1>
@@ -54,7 +56,6 @@ function ItemDetailsPage() {
         </Link>
       </div>
 
-      {/* Item Details */}
       <div className={`item-details-page__info`}>
         <div className={`item-details-page__container`}>
           <div className="item-details-page__detail-container">

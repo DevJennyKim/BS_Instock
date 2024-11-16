@@ -39,6 +39,7 @@
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 0.2s ease;
+    cursor: pointer;
 
     &:hover {
       transform: translateX(-4px);

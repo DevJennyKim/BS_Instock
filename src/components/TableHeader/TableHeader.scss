@@ -33,5 +33,9 @@
 
   &__sort-icon {
     height: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
