@@ -16,6 +16,7 @@ function WarehouseDetailsPage() {
   const [deletedItemId, setDeletedItemId] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [deletedItem, setDeletedItem] = useState({});
+  const [sortProperty, setSortProperty] = useState("");
 
   const openModal = (itemId) => {
     setIsModalOpen(true);
@@ -53,15 +54,21 @@ function WarehouseDetailsPage() {
   }, [id]);
 
   const handleDelete = async () => {
+    const order = isAscending ? "asc" : "desc";
+
     await api.deleteInventoryItem(deletedItemId);
     closeModal();
-    const inventoryResponse = await api.getInventoryByWarehouseId(id);
-    setInventory(inventoryResponse);
+    const sortedData = await api.getSortedInventories(sortProperty, order);
+    const filteredData = sortedData.filter(
+      (item) => item.warehouse_name === warehouseDetails.warehouse_name
+    );
+    setInventory(filteredData);
   };
 
   const handleSort = async (property) => {
     const newOrder = !isAscending;
     setIsAscending(newOrder);
+    setSortProperty(property);
     const order = newOrder ? "asc" : "desc";
 
     const sortedData = await api.getSortedInventories(property, order);
