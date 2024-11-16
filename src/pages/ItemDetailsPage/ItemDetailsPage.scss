@@ -36,15 +36,21 @@
 
     &:hover {
       .item-details-page__back-icon {
-          transform: translateX(-0.25rem);
+        cursor: pointer;
+        transform: translateX(-0.25rem);
       }
-  }
+    }
   }
 
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
     transition: transform 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      transform: translateX(-4px);
+    }
   }
 
   &__title {
@@ -52,9 +58,9 @@
     color: $instock-black;
 
     @include tablet {
-        @include h1-desktop;
+      @include h1-desktop;
     }
-}
+  }
 
   &__edit-button {
     display: flex;

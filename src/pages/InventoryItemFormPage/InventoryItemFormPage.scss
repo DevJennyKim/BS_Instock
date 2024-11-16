@@ -83,18 +83,10 @@
     width: 100%;
     resize: none;
 
-    &:focus {
-      border: none;
-      outline: 0.0625rem solid $instock-indigo;
-    }
     &--textarea {
       height: 7.5rem;
       width: 100%;
-      line-height: 1.9375rem;
-      &:focus {
-        border: none;
-        outline: 0.0625rem solid $instock-indigo;
-      }
+      line-height: 31px;
     }
 
     &--err {
@@ -136,8 +128,8 @@
     margin-right: 0.5rem;
 
     &:checked + .inventory-item__radio-label {
-        color: $instock-black;
-      }
+      color: $instock-black;
+    }
   }
 
   &__radio-label {
