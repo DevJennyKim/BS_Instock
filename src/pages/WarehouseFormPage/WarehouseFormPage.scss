@@ -18,7 +18,7 @@
     padding: 2rem 1rem 1.5rem 1rem;
 
     @include tablet {
-      border-bottom: 1px solid $cloud;
+      border-bottom: 0.0625rem solid $cloud;
       padding: 2rem 2rem 1.5rem 2rem;
     }
   }
@@ -43,7 +43,6 @@
     @include form-field;
     width: 100%;
     margin-bottom: 1rem;
-    @include input_focus;
   }
 
   &__label {
@@ -112,7 +111,7 @@
   &__warehouse-details,
   &__contact-details {
     padding: 1rem;
-    border-top: 1px solid $cloud;
+    border-top: 0.0625rem solid $cloud;
 
     @include tablet {
       border-top: none;
@@ -124,7 +123,7 @@
 
   &__contact-details {
     @include tablet {
-      border-left: 1px solid $cloud;
+      border-left: 0.0625rem solid $cloud;
     }
   }
 }

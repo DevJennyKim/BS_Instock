@@ -2,7 +2,7 @@ import "./WarehouseFormPage.scss";
 import { useEffect, useState } from "react";
 import backIcon from "../../assets/Icons/arrow_back-24px.svg";
 import FormField from "../../components/FormField/FormField";
-import { Link, useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import * as api from "../../api/instock-api";
 import validator from "validator";
 import { phone } from "phone";
@@ -10,6 +10,7 @@ import PropTypes from "prop-types";
 
 function WarehouseForm({ action }) {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [errorMessages, setErrorMessages] = useState({});
   const [newWarehouse, setNewWarehouse] = useState({
     warehouse_name: "",
@@ -118,13 +119,14 @@ function WarehouseForm({ action }) {
   return (
     <section className="warehouse-page">
       <div className="warehouse-page__title-wrapper">
-        <Link to="/warehouses">
+        <div>
           <img
             src={backIcon}
             alt="back"
             className="warehouse-details__back-icon"
+            onClick={() => navigate(-1)}
           />
-        </Link>
+        </div>
         <h1 className="warehouse-page__title">
           {action === "add" ? "Add New Warehouse" : "Edit Warehouse"}
         </h1>
@@ -162,9 +164,9 @@ function WarehouseForm({ action }) {
           ))}
         </section>
         <div className="warehouse-form__button-container">
-          <Link to="/warehouses" className="warehouse-form__link">
+          <button className="warehouse-form__link" onClick={() => navigate(-1)}>
             Cancel
-          </Link>
+          </button>
           <button className="warehouse-form__button">
             {action === "add" ? "+ Add Warehouse" : "Save"}
           </button>

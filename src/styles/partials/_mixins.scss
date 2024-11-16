@@ -101,6 +101,16 @@
   line-height: 16px;
 }
 
+@mixin button-delete {
+  @include h3-labels-links-button-mobile;
+  background-color: $red;
+  color: $white;
+
+  &:hover {
+    background-color: darken($graphite, 5%);
+  }
+}
+
 @mixin button-primary {
   @include font-face($regular-weight);
   background-color: $instock-indigo;
@@ -162,9 +172,12 @@
     height: 2.375rem;
   }
 
-  &:active {
+  &:active,
+  &:focus {
+    border: none;
+    outline: 1px solid $instock-indigo;
     background-color: $white;
-    border: 1px solid $instock-indigo;
+    // border: 1px solid $instock-indigo;
   }
 
   &::placeholder {
@@ -210,9 +223,8 @@
   }
 }
 
-@mixin input_focus {
-  &:focus {
-    border: none;
-    outline: 1px solid $instock-indigo;
-  }
-}
+// @mixin input_focus {
+//   &:focus {
+//
+//   }
+// }

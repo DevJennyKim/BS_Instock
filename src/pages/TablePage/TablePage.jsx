@@ -12,23 +12,29 @@ function TablePage({ page }) {
   const [search, setSearch] = useState('');
 
   const location = useLocation();
+  const [isAscending, setIsAscending] = useState(true);
 
   const inventoryHeaders = [
-    'INVENTORY ITEM',
-    'CATEGORY',
-    'STATUS',
-    'QTY',
-    'WAREHOUSE',
-    'ACTIONS',
+    { text: 'INVENTORY ITEM', property: 'item_name' },
+    { text: 'CATEGORY', property: 'category' },
+    { text: 'STATUS', property: 'status' },
+    { text: 'QTY', property: 'quantity' },
+    { text: 'WAREHOUSE', property: 'warehouse_name' },
+    { text: 'ACTIONS', property: '' },
   ];
 
   const warehouseHeaders = [
-    'WAREHOUSE',
-    'ADDRESS',
-    'CONTACT NAME',
-    'CONTACT INFORMATION',
-    'ACTIONS',
+    { text: 'WAREHOUSE', property: 'warehouse_name' },
+    { text: 'ADDRESS', property: 'address' },
+    { text: 'CONTACT NAME', property: 'contact_name' },
+    { text: 'CONTACT INFORMATION', property: 'contact_email' },
+    { text: 'ACTIONS', property: '' },
   ];
+
+  const loadData = async (endpoint) => {
+    const data = await endpoint();
+    setTableData(data);
+  };
 
   const loadTableData = useCallback(
     async (searchKeyword) => {
@@ -48,18 +54,36 @@ function TablePage({ page }) {
     loadTableData(searchKeyword);
   }, [location.search, loadTableData]);
 
-  const handleClick = useCallback(
+  const handleDelete = useCallback(
     async (id) => {
       if (page === 'warehouses') {
         await api.deleteWarehouse(id);
-        setTableData(await api.getWarehouses());
+        loadData(api.getWarehouses);
       } else if (page === 'inventory') {
         await api.deleteInventoryItem(id);
-        setTableData(await api.getInventories());
+        loadData(api.getInventories);
       }
     },
     [page]
   );
+
+  const handleSort = async (property) => {
+    const newOrder = !isAscending;
+    setIsAscending(newOrder);
+    const order = newOrder ? 'asc' : 'desc';
+
+    if (page === 'warehouses') {
+      const sortedData = await api.getSortedWarehouses(property, order);
+      setTableData(sortedData);
+    }
+
+    if (page === 'inventory') {
+      const sortedData = await api.getSortedInventories(property, order);
+      setTableData(sortedData);
+    }
+  };
+
+  const headers = page === 'warehouses' ? warehouseHeaders : inventoryHeaders;
   const handleChange = (event) => {
     const { value } = event.target;
     setSearch(value);
@@ -125,16 +149,14 @@ function TablePage({ page }) {
         </Link>
       </div>
 
-      <TableHeader
-        headers={page === 'warehouses' ? warehouseHeaders : inventoryHeaders}
-      />
+      <TableHeader headers={headers} handleClick={handleSort} />
       <ul className="table__list">
         {page === 'warehouses' &&
           (filteredData.length > 0 ? filteredData : tableData).map((data) => (
             <li key={data.id}>
               <WarehouseTableRow
                 warehouseInfo={data}
-                handleClick={handleClick}
+                handleClick={handleDelete}
               />
             </li>
           ))}
@@ -143,7 +165,7 @@ function TablePage({ page }) {
             <li key={data.id}>
               <InventoryTableRow
                 inventoryInfo={data}
-                handleClick={handleClick}
+                handleClick={handleDelete}
               />
             </li>
           ))}

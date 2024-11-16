@@ -12,7 +12,8 @@ function DeletePopup({ isOpen, onClose, onConfirm, title, content }) {
       className="modal"
       overlayClassName="modal-overlay"
     >
-      <h2>{title}</h2>
+      <div className="modal__header">
+      <h2 className="modal__title">{title}</h2>
       <img
         src="src/assets/Icons/close-24px.svg"
         alt="close-icon"
@@ -21,6 +22,7 @@ function DeletePopup({ isOpen, onClose, onConfirm, title, content }) {
         onClick={onClose}
       ></img>
       <div className="modal__content">{content}</div>
+      </div>
       <div className="modal__buttons">
         <button
           onClick={onClose}

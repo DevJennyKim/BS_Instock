@@ -1,15 +1,30 @@
-import axios from 'axios';
+import axios from "axios";
 
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-//warehouse
 const getWarehouses = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/warehouses`);
+    return data.sort((a, b) =>
+      a.warehouse_name.localeCompare(b.warehouse_name)
+    );
+  } catch (error) {
+    console.error("Could not get warehouses list:", error);
+    throw new Error("Error getting warehouse list.");
+  }
+};
+
+const getSortedWarehouses = async (sortProperty, sortOrder) => {
+  try {
+    const { data } = await axios.get(
+      `${baseUrl}/api/warehouses?sort_by=${sortProperty}${
+        sortOrder && `&order_by=${sortOrder}`
+      }`
+    );
     return data;
   } catch (error) {
-    console.error('Could not get warehouses list:', error);
-    throw new Error('Error getting warehouse list.');
+    console.error("Could not get sorted warehouses list:", error);
+    throw new Error("Error getting sorted warehouse list.");
   }
 };
 
@@ -27,11 +42,13 @@ const getWarehouseById = async (id) => {
 
 const getInventoryByWarehouseId = async (warehouseId) => {
   try {
-      const response = await axios.get(`${baseUrl}/api/warehouses/${warehouseId}/inventories`);
-      return response.data;
+    const response = await axios.get(
+      `${baseUrl}/api/warehouses/${warehouseId}/inventories`
+    );
+    return response.data.sort((a, b) => a.item_name.localeCompare(b.item_name));
   } catch (error) {
-    console.error('Error getting warehouse inventory:', error);
-    console.error('Error details:', {
+    console.error("Error getting warehouse inventory:", error);
+    console.error("Error details:", {
       status: error.response?.status,
       data: error.response?.data,
       url: error.config?.url,
@@ -48,8 +65,8 @@ const addWarehouse = async (newWarehouse) => {
     );
     return data;
   } catch (error) {
-    console.error('Could not add warehouse:', error);
-    throw new Error('Error adding warehouse.');
+    console.error("Could not add warehouse:", error);
+    throw new Error("Error adding warehouse.");
   }
 };
 
@@ -61,8 +78,8 @@ const updateWarehouse = async (updatedWarehouse, warehouseId) => {
     );
     return data;
   } catch (error) {
-    console.error('Could not update warehouse:', error);
-    throw new Error('Error updating warehouse.');
+    console.error("Could not update warehouse:", error);
+    throw new Error("Error updating warehouse.");
   }
 };
 
@@ -71,8 +88,8 @@ const deleteWarehouse = async (warehouseId) => {
     await axios.delete(`${baseUrl}/api/warehouses/${warehouseId}`);
     return;
   } catch (error) {
-    console.error('Could not delete warehouse:', error);
-    throw new Error('Error deleting warehouse.');
+    console.error("Could not delete warehouse:", error);
+    throw new Error("Error deleting warehouse.");
   }
 };
 
@@ -81,20 +98,32 @@ const deleteInventoryItem = async (inventoryItemId) => {
     await axios.delete(`${baseUrl}/api/inventories/${inventoryItemId}`);
     return;
   } catch (error) {
-    console.error('Could not delete inventory item:', error);
-    throw new Error('Error deleting inventory item.');
+    console.error("Could not delete inventory item:", error);
+    throw new Error("Error deleting inventory item.");
   }
 };
-//===========================================================================================================================================
-//inventory
 
 const getInventories = async () => {
   try {
     const { data } = await axios.get(`${baseUrl}/api/inventories`);
+    return data.sort((a, b) => a.item_name.localeCompare(b.item_name));
+  } catch (error) {
+    console.error("Could not get inventories list:", error);
+    throw new Error("Error getting inventories list.");
+  }
+};
+
+const getSortedInventories = async (sortProperty, sortOrder) => {
+  try {
+    const { data } = await axios.get(
+      `${baseUrl}/api/inventories?sort_by=${sortProperty}${
+        sortOrder && `&order_by=${sortOrder}`
+      }`
+    );
     return data;
   } catch (error) {
-    console.error('Could not get inventories list:', error);
-    throw new Error('Error getting inventories list.');
+    console.error("Could not get sorted warehouses list:", error);
+    throw new Error("Error getting sorted warehouse list.");
   }
 };
 
@@ -106,7 +135,7 @@ const addInventoryItem = async (itemData) => {
     if (error.response?.status === 400) {
       throw new Error(error.response.data.message);
     }
-    throw new Error('Failed to add inventory item');
+    throw new Error("Failed to add inventory item");
   }
 };
 
@@ -119,8 +148,8 @@ const updateInventoryItem = async (updatedItem, itemId) => {
     );
     return data;
   } catch (error) {
-    console.error('Could not update inventory item:', error);
-    throw new Error('Error updating inventory item.');
+    console.error("Could not update inventory item:", error);
+    throw new Error("Error updating inventory item.");
   }
 };
 
@@ -148,4 +177,6 @@ export {
   deleteInventoryItem,
   deleteWarehouse,
   getInventoryByWarehouseId,
+  getSortedWarehouses,
+  getSortedInventories,
 };
