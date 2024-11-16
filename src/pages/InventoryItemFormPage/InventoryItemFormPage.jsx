@@ -129,6 +129,7 @@ function InventoryItemFormPage({ action }) {
             title: 'Added Successfully!',
             text: 'Inventory item added successfully',
             position: 'center-center',
+            timerProgressBar: true,
             timer: 1500,
             showConfirmButton: false,
             didClose: () => {

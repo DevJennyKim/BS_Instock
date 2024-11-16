@@ -117,6 +117,7 @@ function WarehouseForm({ action }) {
           title: 'Added Successfully!',
           text: 'Warehouse added successfully',
           position: 'center-center',
+          timerProgressBar: true,
           timer: 1500,
           showConfirmButton: false,
           didClose: () => {
