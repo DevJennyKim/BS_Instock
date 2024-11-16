@@ -1,16 +1,15 @@
 import './TablePage.scss';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useMemo } from 'react';
 import * as api from '../../api/instock-api';
 import TableHeader from '../../components/TableHeader/TableHeader';
 import InventoryTableRow from '../../components/InventoryTableRow/InventoryTableRow';
 import { Link, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import WarehouseTableRow from '../../components/WarehouseTableRow/WarehouseTableRow';
-
+import debounce from 'lodash.debounce';
 function TablePage({ page }) {
   const [tableData, setTableData] = useState([]);
   const [search, setSearch] = useState('');
-
   const location = useLocation();
   const [isAscending, setIsAscending] = useState(true);
 
@@ -87,11 +86,34 @@ function TablePage({ page }) {
   const handleChange = (event) => {
     const { value } = event.target;
     setSearch(value);
+    debouncedLoadData(value);
+
     const searchParams = new URLSearchParams(location.search);
     searchParams.set('s', value);
     window.history.replaceState(null, '', '?' + searchParams.toString());
-    loadTableData(value);
   };
+
+  const debouncedLoadData = useMemo(
+    () =>
+      debounce(async (keyword) => {
+        if (!keyword.trim()) {
+          setTableData(
+            await (page === 'warehouses'
+              ? api.getWarehouses()
+              : api.getInventories())
+          );
+          return;
+        }
+        await loadTableData(keyword);
+      }, 800),
+    [page]
+  );
+
+  useEffect(() => {
+    return () => {
+      debouncedLoadData.cancel();
+    };
+  }, [debouncedLoadData]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -103,31 +125,14 @@ function TablePage({ page }) {
     const safeText = text
       ? text.toString().toLowerCase().replace(/\s+/g, '')
       : '';
-
-    console.log(safeText);
-
     return safeText.includes(keyword);
   };
 
   const filteredData = tableData.filter((data) => {
-    if (page === 'warehouses') {
-      return (
-        matchesKeyword(data.warehouse_name) ||
-        matchesKeyword(data.address) ||
-        matchesKeyword(data.contact_name) ||
-        matchesKeyword(data.contact_phone) ||
-        matchesKeyword(data.contact_email)
-      );
-    } else if (page === 'inventory') {
-      return (
-        matchesKeyword(data.item_name) ||
-        matchesKeyword(data.category) ||
-        matchesKeyword(data.warehouse_name) ||
-        matchesKeyword(data.status) ||
-        matchesKeyword(data.quantity)
-      );
-    }
-    return false;
+    const allValues = Object.values(data).map((value) =>
+      value ? value.toString() : ''
+    );
+    return allValues.some((value) => matchesKeyword(value));
   });
 
   return (
@@ -141,13 +146,9 @@ function TablePage({ page }) {
             type="text"
             placeholder="Search..."
             className="table__search-input"
+            value={search}
             onChange={handleChange}
           />
-          <div className="table__suggestion-box">
-            <div className="table__suggestion-word">A</div>
-            <div className="table__suggestion-word">B</div>
-            <div className="table__suggestion-word">C</div>
-          </div>
         </form>
         <Link
           to={page === 'warehouses' ? '/warehouses/add' : '/inventory/add'}
