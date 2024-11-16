@@ -32,18 +32,19 @@
     display: flex;
     align-items: flex-end;
     gap: 0.5rem;
-    padding: 1.25rem 0px;
+    padding: 1.25rem 0rem;
+
+    &:hover {
+      .warehouse-details__back-icon {
+        transform: translateX(-0.25rem);
+      }
+    }
   }
 
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
-    cursor: pointer;
     transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translateX(-4px);
-    }
   }
 
   &__title {
@@ -93,17 +94,17 @@
   &__info {
     display: flex;
     flex-direction: column;
-    padding: 16px;
+    padding: 1rem;
     gap: 1.5rem;
 
     @include tablet {
       flex-direction: row;
-      padding-left: 30px;
+      padding-left: 1.875rem;
     }
 
     @include desktop {
-      padding: 24px;
-      padding-left: 30px;
+      padding: 1.5rem;
+      padding-left: 1.875rem;
     }
   }
 
@@ -142,7 +143,7 @@
     @include desktop {
       justify-content: flex-start;
       gap: 22%;
-      padding-left: 41px;
+      padding-left: 2.5625rem;
     }
   }
 
