@@ -92,15 +92,51 @@ function WarehouseForm({ action }) {
     return Object.keys(errors).length === 0;
   };
 
+  const redirecting = () => {
+    Swal.fire({
+      position: 'center-center',
+      showConfirmButton: false,
+      timer: 1200,
+      timerProgressBar: true,
+      icon: 'warning',
+      title: 'Redirecting to homepage',
+      didClose: () => {
+        navigate('/');
+      },
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       if (action === 'add') {
         await api.addWarehouse(newWarehouse);
+        Swal.fire({
+          icon: 'success',
+          title: 'Added Successfully!',
+          text: 'Warehouse added successfully',
+          position: 'center-center',
+          timer: 1500,
+          showConfirmButton: false,
+          didClose: () => {
+            navigate('/');
+          },
+        });
       } else if (action === 'update') {
         await api.updateWarehouse(newWarehouse, id);
-        navigate(-1);
+        Swal.fire({
+          icon: 'success',
+          title: 'Update Successful!',
+          text: 'Your Warehouse has been successfully updated!',
+          position: 'center-center',
+          timerProgressBar: true,
+          timer: 1500,
+          showConfirmButton: false,
+          didClose: () => {
+            navigate('/');
+          },
+        });
       }
 
       setNewWarehouse({
@@ -166,10 +202,16 @@ function WarehouseForm({ action }) {
           ))}
         </section>
         <div className="warehouse-form__button-container">
-          <button className="warehouse-form__link" onClick={() => navigate(-1)}>
+          <button
+            className="warehouse-form__link"
+            type="button"
+            onClick={() => {
+              redirecting();
+            }}
+          >
             Cancel
           </button>
-          <button className="warehouse-form__button">
+          <button className="warehouse-form__button" type="submit">
             {action === 'add' ? '+ Add Warehouse' : 'Save'}
           </button>
         </div>

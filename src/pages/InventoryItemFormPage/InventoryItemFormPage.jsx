@@ -1,10 +1,11 @@
-import "./InventoryItemFormPage.scss";
-import { useNavigate, useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
-import backArrow from "../../assets/Icons/arrow_back-24px.svg";
-import errorIcon from "../../assets/Icons/error-24px.svg";
-import * as api from "../../api/instock-api";
-import PropTypes from "prop-types";
+import './InventoryItemFormPage.scss';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import backArrow from '../../assets/Icons/arrow_back-24px.svg';
+import errorIcon from '../../assets/Icons/error-24px.svg';
+import * as api from '../../api/instock-api';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 
 function InventoryItemFormPage({ action }) {
   const { id } = useParams();
@@ -12,20 +13,20 @@ function InventoryItemFormPage({ action }) {
   const [warehouses, setWarehouses] = useState([]);
   const [error, setError] = useState({});
   const [formData, setFormData] = useState({
-    warehouse_id: "",
-    item_name: "",
-    description: "",
-    category: "",
-    status: "In Stock",
-    quantity: "0",
+    warehouse_id: '',
+    item_name: '',
+    description: '',
+    category: '',
+    status: 'In Stock',
+    quantity: '0',
   });
 
   const categories = [
-    "Electronics",
-    "Gear",
-    "Apparel",
-    "Accessories",
-    "Health",
+    'Electronics',
+    'Gear',
+    'Apparel',
+    'Accessories',
+    'Health',
   ];
 
   useEffect(() => {
@@ -34,14 +35,14 @@ function InventoryItemFormPage({ action }) {
         const warehouseData = await api.getWarehouses();
         setWarehouses(warehouseData);
       } catch (error) {
-        console.error("Failed to load warehouses", error);
+        console.error('Failed to load warehouses', error);
       }
     };
     fetchWarehouses();
   }, []);
 
   useEffect(() => {
-    if (action === "update" && id && warehouses.length > 0) {
+    if (action === 'update' && id && warehouses.length > 0) {
       const fetchInventoryItem = async () => {
         try {
           const itemData = await api.getInventoryItemById(id);
@@ -55,10 +56,10 @@ function InventoryItemFormPage({ action }) {
             category: itemData.category,
             status: itemData.status,
             quantity: itemData.quantity,
-            warehouse_name: warehouse ? warehouse.warehouse_name : "",
+            warehouse_name: warehouse ? warehouse.warehouse_name : '',
           });
         } catch (error) {
-          console.error("Failed to load inventory item", error);
+          console.error('Failed to load inventory item', error);
         }
       };
       fetchInventoryItem();
@@ -68,22 +69,22 @@ function InventoryItemFormPage({ action }) {
   function handleChange(event) {
     const { name, value } = event.target;
     setFormData((prevState) => ({ ...prevState, [name]: value }));
-    setError((prevError) => ({ ...prevError, [name]: "" }));
+    setError((prevError) => ({ ...prevError, [name]: '' }));
   }
 
   const validateForm = () => {
     const errors = {};
     if (!formData.warehouse_id) {
-      errors.warehouse_id = "Warehouse is required";
+      errors.warehouse_id = 'Warehouse is required';
     } else if (isNaN(parseInt(formData.warehouse_id))) {
-      errors.warehouse_id = "Invalid warehouse ID";
+      errors.warehouse_id = 'Invalid warehouse ID';
     }
-    if (!formData.item_name) errors.item_name = "Item Name is required";
-    if (!formData.description) errors.description = "Description is required";
-    if (!formData.category) errors.category = "Category is required";
-    if (formData.status === "In Stock") {
+    if (!formData.item_name) errors.item_name = 'Item Name is required';
+    if (!formData.description) errors.description = 'Description is required';
+    if (!formData.category) errors.category = 'Category is required';
+    if (formData.status === 'In Stock') {
       if (!formData.quantity || parseInt(formData.quantity) < 1) {
-        errors.quantity = "Quantity must be at least 1";
+        errors.quantity = 'Quantity must be at least 1';
       }
     }
 
@@ -92,16 +93,28 @@ function InventoryItemFormPage({ action }) {
   };
 
   const quantityChecker = (event) => {
-    event.target.value = event.target.value.replace(/[^0-9]/g, "");
+    event.target.value = event.target.value.replace(/[^0-9]/g, '');
   };
 
   const formatDataForApi = () => ({
     ...formData,
     warehouse_id: parseInt(formData.warehouse_id),
     quantity:
-      formData.status === "Out of Stock" ? 0 : parseInt(formData.quantity),
+      formData.status === 'Out of Stock' ? 0 : parseInt(formData.quantity),
   });
-
+  const redirecting = () => {
+    Swal.fire({
+      position: 'center-center',
+      showConfirmButton: false,
+      timer: 1200,
+      timerProgressBar: true,
+      icon: 'warning',
+      title: 'Redirecting to homepage',
+      didClose: () => {
+        navigate('/');
+      },
+    });
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (!validateForm()) {
@@ -109,14 +122,36 @@ function InventoryItemFormPage({ action }) {
     } else {
       const formattedData = formatDataForApi();
       try {
-        if (action === "add") {
+        if (action === 'add') {
           await api.addInventoryItem(formattedData);
-        } else if (action === "update") {
+          Swal.fire({
+            icon: 'success',
+            title: 'Added Successfully!',
+            text: 'Inventory item added successfully',
+            position: 'center-center',
+            timer: 1500,
+            showConfirmButton: false,
+            didClose: () => {
+              navigate('/');
+            },
+          });
+        } else if (action === 'update') {
           await api.updateInventoryItem(formattedData, id);
+          Swal.fire({
+            icon: 'success',
+            title: 'Update Successful!',
+            text: 'Your inventory item has been successfully updated!',
+            position: 'center-center',
+            timerProgressBar: true,
+            timer: 1200,
+            showConfirmButton: false,
+            didClose: () => {
+              navigate('/');
+            },
+          });
         }
-        navigate("/inventory");
       } catch (error) {
-        console.error("Error Updating Inventory Item: ", error);
+        console.error('Error Updating Inventory Item: ', error);
       }
     }
   };
@@ -131,7 +166,7 @@ function InventoryItemFormPage({ action }) {
           onClick={() => navigate(-1)}
         />
         <h1 className="inventory-item__header-title">
-          {action === "add" ? "Add New Inventory Item" : "Edit Inventory Item"}
+          {action === 'add' ? 'Add New Inventory Item' : 'Edit Inventory Item'}
         </h1>
       </div>
       <form onSubmit={handleSubmit} className="inventory-item__form">
@@ -224,7 +259,7 @@ function InventoryItemFormPage({ action }) {
                     id="inStock"
                     name="status"
                     value="In Stock"
-                    checked={formData.status === "In Stock"}
+                    checked={formData.status === 'In Stock'}
                     onChange={handleChange}
                     className="inventory-item__radio"
                   />
@@ -241,7 +276,7 @@ function InventoryItemFormPage({ action }) {
                     id="outOfStock"
                     name="status"
                     value="Out of Stock"
-                    checked={formData.status === "Out of Stock"}
+                    checked={formData.status === 'Out of Stock'}
                     onChange={handleChange}
                     className="inventory-item__radio"
                   />
@@ -254,7 +289,7 @@ function InventoryItemFormPage({ action }) {
                 </div>
               </div>
             </div>
-            {formData.status === "In Stock" && (
+            {formData.status === 'In Stock' && (
               <div className="inventory-item__field">
                 <label className="inventory-item__label">Quantity</label>
                 <input
@@ -315,7 +350,9 @@ function InventoryItemFormPage({ action }) {
           <button
             type="button"
             className="inventory-item__button inventory-item__button--secondary"
-            onClick={() => navigate(-1)}
+            onClick={() => {
+              redirecting();
+            }}
           >
             Cancel
           </button>
@@ -323,7 +360,7 @@ function InventoryItemFormPage({ action }) {
             type="submit"
             className="inventory-item__button inventory-item__button--primary"
           >
-            {action === "add" ? "+ Add Item" : "Save"}
+            {action === 'add' ? '+ Add Item' : 'Save'}
           </button>
         </div>
       </form>
