@@ -11,7 +11,7 @@
   &__title {
     @include h1-mobile;
     color: $instock-black;
-
+    cursor: default;
     @include tablet {
       @include h1-desktop;
       flex-grow: 1;

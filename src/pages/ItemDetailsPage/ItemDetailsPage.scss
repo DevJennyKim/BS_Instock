@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/mixins" as *;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
 
 .item-details-page {
   background-color: $white;
@@ -33,13 +33,6 @@
     align-items: flex-end;
     gap: 0.5rem;
     padding: 1.25rem 0px;
-
-    &:hover {
-      .item-details-page__back-icon {
-        cursor: pointer;
-        transform: translateX(-0.25rem);
-      }
-    }
   }
 
   &__back-icon {
@@ -49,12 +42,14 @@
     cursor: pointer;
 
     &:hover {
-      transform: translateX(-4px);
+      transition: transform 0.2s ease;
+      transform: translateX(-0.25rem);
     }
   }
 
   &__title {
     @include h1-mobile;
+    cursor: default;
     color: $instock-black;
 
     @include tablet {

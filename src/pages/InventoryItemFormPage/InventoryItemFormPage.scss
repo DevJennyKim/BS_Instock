@@ -8,7 +8,6 @@
     align-items: center;
     padding: 2rem 1rem 1.5rem 1rem;
 
-
     @include tablet {
       padding: 2rem 2rem 1.5rem 2rem;
     }
@@ -19,15 +18,13 @@
       margin-right: 0.5rem;
       cursor: pointer;
       transition: transform 0.2s ease;
-    }
-
-    &:hover {
-      .inventory-item__header-arrow {
+      &:hover {
         transform: translateX(-0.25rem);
       }
     }
 
     &-title {
+      cursor: default;
       @include h1-mobile;
       @include tablet {
         @include h1-desktop;
@@ -63,6 +60,7 @@
 
     &-title {
       @include h2-mobile;
+      cursor: default;
       padding-bottom: 1.25rem;
 
       @include tablet {
