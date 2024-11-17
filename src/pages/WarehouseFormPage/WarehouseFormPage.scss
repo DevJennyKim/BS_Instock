@@ -5,7 +5,7 @@
 .warehouse-page {
   &__title {
     @include h1-mobile;
-
+    cursor: default;
     @include tablet {
       @include h1-desktop;
     }
@@ -16,13 +16,6 @@
     align-items: flex-end;
     gap: 0.5rem;
     padding: 2rem 1rem 1.5rem 1rem;
-
-    &:hover {
-      .warehouse-details__back-icon {
-        cursor: pointer;
-        transform: translateX(-0.25rem);
-      }
-    }
 
     @include tablet {
       border-bottom: 0.0625rem solid $cloud;

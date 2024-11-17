@@ -1,5 +1,5 @@
-@use "../../styles/partials/variables" as *;
-@use "../../styles/partials/mixins" as *;
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
 
 .warehouse-details {
   background-color: $white;
@@ -46,24 +46,21 @@
     align-items: flex-end;
     gap: 0.5rem;
     padding: 1.25rem 0rem;
-
-    &:hover {
-      .warehouse-details__back-icon {
-        cursor: pointer;
-        transform: translateX(-0.25rem);
-      }
-    }
   }
 
   &__back-icon {
     width: 1.5rem;
     height: 1.5rem;
     cursor: pointer;
-    transition: transform 0.2s ease;
+    &:hover {
+      transition: transform 0.2s ease;
+      transform: translateX(-0.25rem);
+    }
   }
 
   &__title {
     @include h1-mobile;
+    cursor: default;
     color: $instock-black;
 
     @include tablet {
@@ -82,6 +79,11 @@
     height: 2.25rem;
     padding: 0.5rem;
     text-decoration: none;
+    &:hover {
+      background-color: $instock-black;
+      border-color: $instock-black;
+      cursor: pointer;
+    }
 
     @include tablet {
       width: auto;
