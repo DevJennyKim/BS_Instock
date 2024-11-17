@@ -1,4 +1,4 @@
-
+![Flying Falcons](./src/assets/Images/Flying-Falcons.png)
 # Instock-FrontEnd: Flying Falcons
 
 Welcome to the Instock project, developed by the Flying Falcons team!
