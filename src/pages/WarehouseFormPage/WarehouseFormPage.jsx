@@ -101,7 +101,7 @@ function WarehouseForm({ action }) {
       icon: 'warning',
       title: 'Redirecting to previous page',
       didClose: () => {
-        navigate('/');
+        navigate(-1);
       },
     });
   };
@@ -121,7 +121,7 @@ function WarehouseForm({ action }) {
           timer: 1500,
           showConfirmButton: false,
           didClose: () => {
-            navigate('/');
+            navigate('/warehouses');
           },
         });
       } else if (action === 'update') {
@@ -135,7 +135,7 @@ function WarehouseForm({ action }) {
           timer: 1500,
           showConfirmButton: false,
           didClose: () => {
-            navigate('/');
+            navigate(-1);
           },
         });
       }
