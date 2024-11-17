@@ -1,4 +1,4 @@
-![Alt text](https://upskill-brainstation.slack.com/files/U07MM65GL6P/F081VJW3CAU/flying-falcons.png)
+
 # Instock-FrontEnd: Flying Falcons
 
 Welcome to the Instock project, developed by the Flying Falcons team!
