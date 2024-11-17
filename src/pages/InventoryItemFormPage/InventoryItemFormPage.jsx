@@ -111,7 +111,7 @@ function InventoryItemFormPage({ action }) {
       icon: 'warning',
       title: 'Redirecting to previous page',
       didClose: () => {
-        navigate('/inventory');
+        navigate(-1);
       },
     });
   };
@@ -147,7 +147,7 @@ function InventoryItemFormPage({ action }) {
             timer: 1200,
             showConfirmButton: false,
             didClose: () => {
-              navigate('/inventory');
+              navigate(-1);
             },
           });
         }
