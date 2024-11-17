@@ -8,6 +8,7 @@
     align-items: center;
     padding: 2rem 1rem 1.5rem 1rem;
 
+
     @include tablet {
       padding: 2rem 2rem 1.5rem 2rem;
     }
@@ -15,8 +16,15 @@
     &-arrow {
       width: 1.5rem;
       height: 1.5rem;
-      margin-right: 1rem;
+      margin-right: 0.5rem;
       cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover {
+      .inventory-item__header-arrow {
+        transform: translateX(-0.25rem);
+      }
     }
 
     &-title {

@@ -17,6 +17,13 @@
     gap: 0.5rem;
     padding: 2rem 1rem 1.5rem 1rem;
 
+    &:hover {
+      .warehouse-details__back-icon {
+        cursor: pointer;
+        transform: translateX(-0.25rem);
+      }
+    }
+
     @include tablet {
       border-bottom: 0.0625rem solid $cloud;
       padding: 2rem 2rem 1.5rem 2rem;
