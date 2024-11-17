@@ -1,5 +1,6 @@
-<img src="./src/assets/Images/Flying-Falcons.png" alt="Flying Falcons" width="300"/>
-
+<div align="center">
+  <img src="./src/assets/Images/Flying-Falcons.png" alt="Flying Falcons" width="300"/>
+</div>
 # Instock-FrontEnd: Flying Falcons
 
 Welcome to the Instock project, developed by the Flying Falcons team!
