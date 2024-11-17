@@ -68,6 +68,11 @@
     height: 2.25rem;
     padding: 0.5rem;
     text-decoration: none;
+    &:hover {
+      background-color: $instock-black;
+      border-color: $instock-black;
+      cursor: pointer;
+    }
 
     @include tablet {
       width: auto;
