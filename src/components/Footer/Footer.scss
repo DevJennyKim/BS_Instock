@@ -1,0 +1,31 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.footer {
+    width: 100%;
+    padding: 2.5rem;
+    text-align: center;
+    margin-top: auto;
+
+    @include tablet {
+        padding: 2.5rem;
+    }
+
+    @include desktop {
+        padding: 3.125rem;
+    }
+
+    &__text {
+        @include body-small-mobile;
+        color: $slate;
+        margin: 0;
+
+        @include tablet {
+            @include body-small-desktop;
+        }
+
+        @include desktop {
+            @include body-small-desktop;
+        }
+    }
+}

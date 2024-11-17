@@ -1,0 +1,41 @@
+@use "../../styles/partials/mixins" as *;
+@use "../../styles/partials/variables" as *;
+
+.table-header {
+  &__header {
+    @include table-header-mobile;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+
+    @include tablet {
+      @include table-header-desktop;
+    }
+
+    &:last-child {
+      justify-content: end;
+    }
+  }
+
+  &__container {
+    display: none;
+
+    @include tablet {
+      background-color: $light-grey;
+      color: $slate;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 2.5rem;
+      padding: 0 2rem;
+    }
+  }
+
+  &__sort-icon {
+    height: 1rem;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

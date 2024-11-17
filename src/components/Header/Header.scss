@@ -1,0 +1,77 @@
+@use '../../styles/partials/variables' as *;
+@use '../../styles/partials/mixins' as *;
+
+.header {
+    background-color: $graphite;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1rem;
+    padding-bottom: 5.625rem;
+
+    @include tablet {
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 1.25rem 1.875rem 7.0625rem 1.875rem;
+    }
+
+    @include desktop {
+        padding: 1.875rem 5rem 7.1875rem 5rem;
+    }
+
+    &__wrapper {
+        display: flex;
+        align-items: center;
+        padding-bottom: 1rem;
+    }
+
+    &__instock {
+        height: 1.75rem;
+        width: auto;
+    }
+
+    &__nav {
+        &-list {
+            display: flex;
+            gap: 1.875rem;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            @include tablet {
+                gap: 0.5rem;
+            }
+        }
+
+
+        &-link {
+            @include h3-labels-links-button-mobile;
+            color: $slate;
+            text-decoration: none;
+            padding: 0.5rem 2.25rem;
+            border-radius: 1.25rem;
+            transition: all 0.3s ease;
+
+            @include tablet {
+                @include h3-labels-links-button-desktop;
+                padding: 0.5rem 1rem;
+            }
+
+            &:hover {
+                color: $white;
+                text-decoration: underline;
+            }
+
+            &--active {
+                background-color: $instock-black;
+                color: $white;
+
+                &:hover {
+                    background-color: $instock-black;
+                    color: $white;
+                }
+            }
+        }
+    }
+}
